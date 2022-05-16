@@ -31,10 +31,12 @@ public class BattleshipGame {
 		return gridSize;
 	}
 
-	public void initGame(int gridsize){
-		
+	public void initGame(int gridsize){		
 		this.initialized = true;
-		this.inProgress = true;
+		if(gridsize < 7 || gridsize > 10){
+			this.initialized = false;
+		}
+		this.inProgress = this.initialized;
 	}
 
 	public boolean getInitialized(){
