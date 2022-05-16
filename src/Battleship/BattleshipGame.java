@@ -6,10 +6,10 @@ public class BattleshipGame {
 
 	private boolean initialized;
 	private boolean inProgress;
+	private int gridSize;
 	public static void main(String[] args) {
 		BattleshipGame game = new BattleshipGame();
-		int gridsize = game.getUserGridSize();
-		game.initGame(gridsize);
+		game.initGame(game.getUserGridSize());
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
 			while(game.inProgress){
@@ -21,19 +21,20 @@ public class BattleshipGame {
 	}
 
 	public int getUserGridSize(){
-		int gridSize = 0;
+		int size = 0;
 		Scanner myInput = new Scanner(System.in);
-		while(gridSize < 7 || gridSize > 10){
+		while(size < 7 || size > 10){
 			System.out.println("Please enter game grid size (7 - 10)");  
 			try {
-				gridSize = Integer.parseInt(myInput.nextLine());
+				size = Integer.parseInt(myInput.nextLine());
 			} catch (NumberFormatException nfe){
-				gridSize = 0;
+				size = 0;
 			}
 
 		}  
 		myInput.close();
-		return gridSize;
+		this.gridSize = size;
+		return size;
 	}
 
 	public void initGame(int gridsize){		
@@ -64,7 +65,7 @@ public class BattleshipGame {
 		return "We will play Battleships";
 	}
 
-	private class Board{
+	public class Board{
 		int gridSize;
 		BoardPosition[][] positions = new BoardPosition[gridSize][gridSize];
 

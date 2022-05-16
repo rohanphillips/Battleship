@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import Battleship.BattleshipGame;
+import Battleship.*;
 
 public class BattleshipTests {
    
@@ -32,4 +32,6 @@ public class BattleshipTests {
       game.initGame(10);
       assertEquals(true, game.getInitialized());
    }
+
 }
+
