@@ -39,7 +39,7 @@ public class BoardPositionTests {
       assertEquals(false, position.getIsGuessed());
 
       position.setIsGuessed(true);
-      assertEquals(true, position.getIsHit());
+      assertEquals(true, position.getIsGuessed());
    }
 
    @Test
