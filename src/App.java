@@ -1,10 +1,10 @@
-import java.util.*;
 
-import Battleships.Battleship;
+
+import Battleship.BattleshipGame;
 
 public class App {
     public static void main(String[] args) {
-        Battleship game = new Battleship();
-        System.out.println(game.play());
+        BattleshipGame game = new BattleshipGame();
+        game.initGame();
     }
 }
