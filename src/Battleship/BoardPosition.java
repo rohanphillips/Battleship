@@ -1,19 +1,43 @@
 package Battleship;
 
 public class BoardPosition {
-   private static boolean isEmpty = true;
-   private static boolean isHit = false;
-   private static boolean isGuessed = false;
+   private boolean isEmpty;
+   private boolean isHit;
+   private boolean isGuessed;
 
-   public static void setIsEmpty(boolean setEmpty){
-      BoardPosition.isEmpty = setEmpty;
+   public BoardPosition(){
+      this.isEmpty = false;
+      this.isHit = false;
+      this.isGuessed = false;
    }
 
-   public static void setIsHit(boolean setIsHit){
-      BoardPosition.isHit = setIsHit;
+   public BoardPosition(boolean isEmpty, boolean isHit, boolean isGuessed){
+      this.isEmpty = isEmpty;
+      this.isHit = isHit;
+      this.isGuessed = isGuessed;
    }
 
-   public static void setIsGuessed(boolean setIsGuessed){
-      BoardPosition.isGuessed = setIsGuessed;
+   public void setIsEmpty(boolean setEmpty){
+      this.isEmpty = setEmpty;
+   }
+
+   public boolean getIsEmpty(){
+      return isEmpty;
+   }
+
+   public void setIsHit(boolean setIsHit){
+      this.isHit = setIsHit;
+   }
+
+   public boolean getIsHit(){
+      return isHit;
+   }
+
+   public void setIsGuessed(boolean setIsGuessed){
+      this.isGuessed = setIsGuessed;
+   }
+
+   public boolean getIsGuessed(){
+      return isGuessed;
    }
 }
