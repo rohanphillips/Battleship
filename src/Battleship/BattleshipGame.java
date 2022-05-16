@@ -8,7 +8,8 @@ public class BattleshipGame {
 	private boolean inProgress;
 	public static void main(String[] args) {
 		BattleshipGame game = new BattleshipGame();
-		game.initGame();
+		int gridsize = game.getUserGridSize();
+		game.initGame(gridsize);
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
 			while(game.inProgress){
@@ -19,7 +20,7 @@ public class BattleshipGame {
 		}
 	}
 
-	public void initGame(){
+	public int getUserGridSize(){
 		int gridSize = 0;
 		Scanner myInput = new Scanner(System.in);
 		while(gridSize < 7 || gridSize > 10){
@@ -27,6 +28,11 @@ public class BattleshipGame {
 			gridSize = Integer.parseInt(myInput.nextLine());
 		}  
 		myInput.close();
+		return gridSize;
+	}
+
+	public void initGame(int gridsize){
+		
 		this.initialized = true;
 		this.inProgress = true;
 	}
