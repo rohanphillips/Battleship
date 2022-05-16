@@ -25,7 +25,12 @@ public class BattleshipGame {
 		Scanner myInput = new Scanner(System.in);
 		while(gridSize < 7 || gridSize > 10){
 			System.out.println("Please enter game grid size (7 - 10)");  
-			gridSize = Integer.parseInt(myInput.nextLine());
+			try {
+				gridSize = Integer.parseInt(myInput.nextLine());
+			} catch (NumberFormatException nfe){
+				gridSize = 0;
+			}
+
 		}  
 		myInput.close();
 		return gridSize;
