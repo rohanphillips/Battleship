@@ -12,7 +12,7 @@ public class PlayerTests {
    @Test
    @DisplayName("Create Player")
    public void createPlayer(){
-      Player player = new Player(10);
+      Player player = new Player(10, 1, true);
 
       assertEquals(player.getPieceBoard().getClass(), Battleship.Board.class);
       assertEquals(player.getGuessboard().getClass(), Battleship.Board.class);
@@ -21,12 +21,12 @@ public class PlayerTests {
    @Test
    @DisplayName("Test PlayerNumber")
    public void testPlayerNumber(){
-      Player player = new Player(10);
+      Player player = new Player(10, 1, true);
 
-      assertEquals(true, player.getPlayerNumber() == 0);
-
-      player.setPlayerNumber((1));
       assertEquals(true, player.getPlayerNumber() == 1);
+
+      player.setPlayerNumber((2));
+      assertEquals(true, player.getPlayerNumber() == 2);
 
    }
 

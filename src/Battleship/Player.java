@@ -2,13 +2,15 @@ package Battleship;
 
 public class Player {
    private int playerNumber;
+   private boolean isComputer;
    private Board pieceBoard;
    private Board guessBoard;
 
-   public Player(int gridsize){
+   public Player(int gridsize, int playerNumber, boolean isComputer){
       this.pieceBoard = new Board(gridsize);
       this.guessBoard = new Board(gridsize);
-      this.playerNumber = 0;
+      this.playerNumber = playerNumber;
+      this.isComputer = isComputer;
    }
 
    public void setPlayerNumber(int num){

@@ -7,7 +7,7 @@ public class BattleshipGame {
 	private boolean initialized;
 	private boolean inProgress;
 	private int gridSize;
-	 private Board board;
+	private Board board;
 	public static void main(String[] args) {
 		BattleshipGame game = new BattleshipGame();
 		game.initGame(game.getUserGridSize());
