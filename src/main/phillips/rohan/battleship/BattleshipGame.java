@@ -1,4 +1,4 @@
-package Battleship;
+package main.phillips.rohan.battleship;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ public class BattleshipGame {
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
 			while(game.inProgress){
-				game.inProgress = false;
+				//game.inProgress = false;
 			}
 		} else {
 			System.out.println("Game did not initialize");
@@ -43,15 +43,15 @@ public class BattleshipGame {
 	}
 
 	public void initGame(int gridsize){			
-		this.initialized = true;
+		initialized = true;
 		if(gridsize < 7 || gridsize > 10){
-			this.initialized = false;
+			initialized = false;
 		}
 		player1 = new Player(gridsize, 1, false);
 		player1.gatherInfo(userInput);
 		player2 = new Player(gridsize, 2, false);
 		player2.gatherInfo(userInput);
-		this.inProgress = this.initialized;
+		inProgress = initialized;
 	}
 
 	public boolean getInitialized(){
@@ -59,7 +59,7 @@ public class BattleshipGame {
 	}
 
 	public void setInitialized(boolean val){
-		this.initialized = val;
+		initialized = val;
 	}
 
 	public boolean getInProgress(){
@@ -67,7 +67,7 @@ public class BattleshipGame {
 	}
 
 	public void setInProgress(boolean val){
-		this.inProgress = val;
+		inProgress = val;
 	}
 }
 

@@ -1,4 +1,4 @@
-package test.Battleship;
+package test.phillips.rohan.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

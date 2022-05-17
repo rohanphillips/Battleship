@@ -1,11 +1,11 @@
-package test.Battleship;
+package test.phillips.rohan.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import Battleship.Player;
+import main.phillips.rohan.battleship.Player;
 
 public class PlayerTests {
    
@@ -14,8 +14,8 @@ public class PlayerTests {
    public void createPlayer(){
       Player player = new Player(10, 1, true);
 
-      assertEquals(player.getPieceBoard().getClass(), Battleship.Board.class);
-      assertEquals(player.getGuessboard().getClass(), Battleship.Board.class);
+      assertEquals(player.getPieceBoard().getClass(), main.phillips.rohan.battleship.Board.class);
+      assertEquals(player.getGuessboard().getClass(), main.phillips.rohan.battleship.Board.class);
    }
 
    @Test
