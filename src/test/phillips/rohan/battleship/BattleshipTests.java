@@ -13,24 +13,21 @@ public class BattleshipTests {
    @DisplayName("Init fails with grid size < 7")
    public void gridLow(){
       BattleshipGame game = new BattleshipGame();
-      game.initGame(6);
-      assertEquals(false, game.getInitialized());
+      assertEquals(false, game.isGridSizeValid(6));
    }
 
    @Test
    @DisplayName("Init fails with grid size > 10")
    public void gridHigh(){
       BattleshipGame game = new BattleshipGame();
-      game.initGame(11);
-      assertEquals(false, game.getInitialized());
+      assertEquals(false, game.isGridSizeValid(11));
    }
    
    @Test
    @DisplayName("Game Initializes with in range grid")
    public void gridInRange(){
       BattleshipGame game = new BattleshipGame();
-      game.initGame(7);
-      assertEquals(true, game.getInitialized());
+      assertEquals(true, game.isGridSizeValid(7));
    }
 
 }

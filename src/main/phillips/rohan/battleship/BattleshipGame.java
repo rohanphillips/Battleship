@@ -16,7 +16,7 @@ public class BattleshipGame {
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
 			while(game.inProgress){
-				//game.inProgress = false;
+				game.inProgress = false;
 			}
 		} else {
 			System.out.println("Game did not initialize");
@@ -43,15 +43,15 @@ public class BattleshipGame {
 	}
 
 	public void initGame(int gridsize){			
-		initialized = true;
-		if(gridsize < 7 || gridsize > 10){
-			initialized = false;
+		setInitialized(true);
+		if(!isGridSizeValid(gridsize)){
+			setInitialized(false);
 		}
 		player1 = new Player(gridsize, 1, false);
 		player1.gatherInfo(userInput);
 		player2 = new Player(gridsize, 2, false);
 		player2.gatherInfo(userInput);
-		inProgress = initialized;
+		setInProgress(getInitialized());
 	}
 
 	public boolean getInitialized(){
@@ -68,6 +68,10 @@ public class BattleshipGame {
 
 	public void setInProgress(boolean val){
 		inProgress = val;
+	}
+
+	public boolean isGridSizeValid(int gridsize){
+		return gridsize >= 7 && gridsize <= 10;
 	}
 }
 
