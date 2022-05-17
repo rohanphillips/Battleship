@@ -27,7 +27,17 @@ public class PlayerTests {
 
       player.setPlayerNumber((2));
       assertEquals(true, player.getPlayerNumber() == 2);
+   }
 
+   @Test
+   @DisplayName("Test isComputer")
+   public void testIsComputer(){
+      Player player = new Player(10, 1, false);
+
+      assertEquals(false, player.getIsComputer());
+
+      player.setIsComputer(true);
+      assertEquals(true, player.getIsComputer());
    }
 
 

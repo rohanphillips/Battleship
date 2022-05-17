@@ -28,4 +28,13 @@ public class Player {
    public Board getGuessboard(){
       return this.guessBoard;
    }
+
+   public void setIsComputer(boolean isComputer){
+      this.isComputer = isComputer;
+   }
+
+   public boolean getIsComputer(){
+      return this.isComputer;
+   }
+
 }
