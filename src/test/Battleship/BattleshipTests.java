@@ -29,7 +29,7 @@ public class BattleshipTests {
    @DisplayName("Game Initializes with in range grid")
    public void gridInRange(){
       BattleshipGame game = new BattleshipGame();
-      game.initGame(10);
+      game.initGame(7);
       assertEquals(true, game.getInitialized());
    }
 
