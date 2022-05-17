@@ -3,12 +3,8 @@ package Battleship;
 public class Board {
    int gridSize;
    BoardPosition[][] positions = new BoardPosition[gridSize][gridSize];
-
-   public Board(){
-      gridSize = 10;
-   }
-
-   public void board(int grid){
+   
+   public Board(int grid){
       gridSize = grid;
    }
 

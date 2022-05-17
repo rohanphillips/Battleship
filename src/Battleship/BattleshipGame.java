@@ -7,6 +7,7 @@ public class BattleshipGame {
 	private boolean initialized;
 	private boolean inProgress;
 	private int gridSize;
+	 private Board board;
 	public static void main(String[] args) {
 		BattleshipGame game = new BattleshipGame();
 		game.initGame(game.getUserGridSize());
@@ -42,6 +43,7 @@ public class BattleshipGame {
 		if(gridsize < 7 || gridsize > 10){
 			this.initialized = false;
 		}
+		this.board = new Board(this.gridSize);
 		this.inProgress = this.initialized;
 	}
 
