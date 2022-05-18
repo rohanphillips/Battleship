@@ -49,4 +49,17 @@ public class CoordinatesTests {
       int[] expect1 = new int[] {0, 9};
       assertArrayEquals(expect1, Coordinates.getCoordinates("A10", 10));
    }
+
+   @Test
+   @DisplayName("Test Orientation")
+   public void testOrientation(){
+      assertEquals(true, Coordinates.isValidOrientation("A1", "A4", 10));
+      assertEquals(true, Coordinates.isValidOrientation("A1", "D1", 10));
+
+      assertEquals(false, Coordinates.isValidOrientation("A1", "b4", 10));
+
+      assertEquals(false, Coordinates.isValidOrientation("A7", "a11", 10));
+      assertEquals(false, Coordinates.isValidOrientation("A0", "a4", 10));
+      assertEquals(false, Coordinates.isValidOrientation("F7", "l7", 10));
+   }
 }
