@@ -1,11 +1,11 @@
-package test.phillips.rohan.battleship;
+package test.phillips.rohan.battleship.board;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import main.phillips.rohan.battleship.BoardPosition;
+import main.phillips.rohan.battleship.board.BoardPosition;
 
 public class BoardPositionTests {
 

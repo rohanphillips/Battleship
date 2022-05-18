@@ -1,4 +1,4 @@
-package main.phillips.rohan.battleship;
+package main.phillips.rohan.battleship.board;
 
 public class BoardPosition {
    private boolean isEmpty;

@@ -2,6 +2,8 @@ package main.phillips.rohan.battleship;
 
 import java.util.*;
 
+import main.phillips.rohan.battleship.board.Board;
+
 public class Player {
    private int playerNumber;
    private boolean isComputer;
