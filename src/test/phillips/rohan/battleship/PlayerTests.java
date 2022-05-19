@@ -1,13 +1,17 @@
 package test.phillips.rohan.battleship;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.*;
+
 import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.ships.Ship;
+import main.phillips.rohan.battleship.ships.Ship.ShipType;
 import main.phillips.rohan.battleship.ships.Carrier;
 import main.phillips.rohan.battleship.ships.Destroyer;
 
@@ -74,5 +78,21 @@ public class PlayerTests {
       player.addShip(ship1);
       assertEquals(Ship.ShipType.CARRIER, player.getShip(Ship.ShipType.CARRIER).getShipType());
 
+   }
+
+   @Test
+   @DisplayName("Get player ship list")
+   public void getPlayerShipList(){
+      Player player = new Player(gridSize, 1, false); 
+      Carrier ship1 = new Carrier();
+      List<Ship.ShipType> ships = new ArrayList<>();
+
+      assertEquals(ships, player.shipList());
+
+      ships.add(Ship.ShipType.CARRIER);
+      player.addShip(ship1);
+
+      assertEquals(ships, player.shipList());
+      
    }
 }

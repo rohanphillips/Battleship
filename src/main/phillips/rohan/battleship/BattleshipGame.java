@@ -1,7 +1,13 @@
 package main.phillips.rohan.battleship;
 
 import java.util.*;
-import main.phillips.rohan.battleship.board.Board;
+
+import main.phillips.rohan.battleship.ships.Battleship;
+import main.phillips.rohan.battleship.ships.Carrier;
+import main.phillips.rohan.battleship.ships.Cruiser;
+import main.phillips.rohan.battleship.ships.Destroyer;
+import main.phillips.rohan.battleship.ships.Ship;
+import main.phillips.rohan.battleship.ships.Submarine;
 
 public class BattleshipGame {
 
@@ -58,7 +64,35 @@ public class BattleshipGame {
 	}
 
 	public void selectShips(Player player){
-		System.out.println("Will let Player " + player.getPlayerNumber() + " choose ships:");
+		int selected = -1;
+		int temp;
+		System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
+		while(Ship.ShipType.getList().size() != player.shipList().size()){
+			List<String> diff = Ship.ShipType.getList();
+			diff.removeAll(player.shipList());
+			diff.forEach(s -> System.out.println((diff.indexOf(s) + 1) + ": " + s));
+			temp = Integer.parseInt(userInput.nextLine());
+			Ship ship = buildShip(diff.toArray()[temp - 1].toString());
+			player.addShip(ship);
+		}
+		
+	}
+
+	public Ship buildShip(String ship){
+		switch(ship){
+			case "BATTLESHIP":
+				return new Battleship();
+			case "CARRIER":
+				return new Carrier();
+			case "CRUISER":
+				return new Cruiser();
+			case "DESTROYER":
+				return new Destroyer();
+			case "SUBMARINE":
+				return new Submarine();
+			default:
+				return new Ship();
+		}
 	}
 
 	public boolean getInitialized(){

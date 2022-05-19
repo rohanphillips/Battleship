@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import main.phillips.rohan.battleship.ships.Ship;
 import main.phillips.rohan.battleship.ships.Ship.ShipType;

@@ -90,8 +90,12 @@ public class Player {
    }
 
    public boolean shipExists(Ship ship){
-      List<Object> result = ships.stream().filter(s -> s.getShipType() == ship.getShipType()).collect(Collectors.toList());
+      List<Ship> result = ships.stream().filter(s -> s.getShipType() == ship.getShipType()).collect(Collectors.toList());
       return !result.isEmpty();
+   }
+
+   public List<String> shipList(){
+      return ships.stream().map(s -> s.getShipType().toString()).collect(Collectors.toList());
    }
 
 }
