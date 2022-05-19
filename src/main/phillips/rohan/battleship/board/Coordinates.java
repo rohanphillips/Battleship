@@ -1,10 +1,7 @@
 package main.phillips.rohan.battleship.board;
 
-import java.util.Optional;
 
 import java.util.Arrays;
-
-import main.phillips.rohan.battleship.board.OrientationInfo;
 
 public class Coordinates {
    

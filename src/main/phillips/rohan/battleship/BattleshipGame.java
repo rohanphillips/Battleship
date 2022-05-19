@@ -52,12 +52,13 @@ public class BattleshipGame {
 		player1.gatherInfo(userInput);
 		player2 = new Player(gridsize, 2, false);
 		player2.gatherInfo(userInput);
+		selectShips(player1);
 
 		setInProgress(getInitialized());
 	}
 
 	public void selectShips(Player player){
-		
+		System.out.println("Will let Player " + player.getPlayerNumber() + " choose ships:");
 	}
 
 	public boolean getInitialized(){

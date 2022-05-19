@@ -1,5 +1,8 @@
 package main.phillips.rohan.battleship.ships;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 import main.phillips.rohan.battleship.board.BoardPosition;
 
 public class Ship {
@@ -7,7 +10,7 @@ public class Ship {
    private BoardPosition[] positions;
 
    public enum ShipType {
-      CARRIER(5), BATTLESHIP(4), CRUISER(3), SUBMARINE(3), DESTROYER(2), NOTSET(-1);
+      BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
 
       private int length;
 
@@ -17,6 +20,10 @@ public class Ship {
 
       public int getLength(){
          return length;
+      }
+
+      public static List<String> getList(){
+         return EnumSet.allOf(ShipType.class).stream().filter(type -> !type.name().equals("NOTSET")).map(ShipType::name).collect(Collectors.toList());
       }
    }
 

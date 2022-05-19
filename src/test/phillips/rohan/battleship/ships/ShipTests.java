@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 import main.phillips.rohan.battleship.ships.Ship;
 import main.phillips.rohan.battleship.ships.Ship.ShipType;
 import main.phillips.rohan.battleship.ships.Carrier;
@@ -78,6 +81,17 @@ public class ShipTests {
       assertEquals(Ship.ShipType.BATTLESHIP, ship.getShipType());
    }
 
-   
+   @Test
+   @DisplayName("Ship List available")
+   public void getShipList(){
+      List<String> ships = new ArrayList<>();
+      ships.add("BATTLESHIP");
+      ships.add("CARRIER");      
+      ships.add("CRUISER");
+      ships.add("DESTROYER");
+      ships.add("SUBMARINE");
+      
+      assertEquals(ships, Ship.ShipType.getList());
+   }
 
 }
