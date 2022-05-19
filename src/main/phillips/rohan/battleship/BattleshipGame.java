@@ -1,6 +1,7 @@
 package main.phillips.rohan.battleship;
 
 import java.util.*;
+import main.phillips.rohan.battleship.board.Board;
 
 public class BattleshipGame {
 
@@ -51,7 +52,12 @@ public class BattleshipGame {
 		player1.gatherInfo(userInput);
 		player2 = new Player(gridsize, 2, false);
 		player2.gatherInfo(userInput);
+
 		setInProgress(getInitialized());
+	}
+
+	public void selectShips(Player player){
+		
 	}
 
 	public boolean getInitialized(){

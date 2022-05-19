@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import java.util.Arrays;
 
+import main.phillips.rohan.battleship.board.OrientationInfo;
+
 public class Coordinates {
    
    private Coordinates() {
@@ -23,8 +25,8 @@ public class Coordinates {
          return columnNumber;
       }
 
-      public static Optional<Column>  get(int col){
-         return Arrays.stream(Column.values()).filter(column -> column.columnNumber == col).findFirst();
+      public static String get(int col){
+         return Arrays.stream(Column.values()).filter(column -> column.columnNumber == col).findFirst().map(Object::toString).orElse("");
       }
    }
 
@@ -59,18 +61,24 @@ public class Coordinates {
       return willReturn;
    }
 
-   public static boolean isValidOrientation(String start, String end, int gridSize){
-      String col1, col2;
-      int row1, row2;
+   public static String getCoordinatePair(int row, int col){
+      return Column.get(col) + (row + 1);
+   }
+
+   public static OrientationInfo isValidOrientation(String start, String end, int gridSize){
+      String col1;
+      String col2;
+      int row1;
+      int row2;
       if(isValidPair(start, gridSize) && isValidPair(end, gridSize)){
          col1 = getColumn(start);
          row1 = getRow(start);
          col2 = getColumn(end);
          row2 = getRow(end);
-         return (col1.equals(col2) && row1 != row2) || (row1 == row2 && !col1.equals(col2));
+         return new OrientationInfo((col1.equals(col2) && row1 != row2) || (row1 == row2 && !col1.equals(col2)), col1, row1, col2, row2);
       } 
-      return false;
-   }
+      return new OrientationInfo(false, "", 0, "", 0);
+   }   
 
    private static String getColumn(String str){
       return str.substring(0, 1).toUpperCase();

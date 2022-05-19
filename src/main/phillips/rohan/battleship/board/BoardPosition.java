@@ -1,9 +1,12 @@
 package main.phillips.rohan.battleship.board;
 
+import main.phillips.rohan.battleship.ships.Carrier;
+
 public class BoardPosition {
    private boolean isEmpty;
    private boolean isHit;
    private boolean isGuessed;
+   private Object ship;
 
    public BoardPosition(){
       this.isEmpty = false;
@@ -15,6 +18,7 @@ public class BoardPosition {
       this.isEmpty = isEmpty;
       this.isHit = isHit;
       this.isGuessed = isGuessed;
+      this.ship = new Carrier();
    }
 
    public void setIsEmpty(boolean setEmpty){
@@ -39,5 +43,13 @@ public class BoardPosition {
 
    public boolean getIsGuessed(){
       return isGuessed;
+   }
+
+   public void setShip(Object ship){
+      this.ship = ship;
+   }
+
+   public Object getShip(){
+      return ship;
    }
 }

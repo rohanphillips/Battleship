@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.Optional;
-
 import main.phillips.rohan.battleship.board.Coordinates;
-import main.phillips.rohan.battleship.board.Coordinates.Column;
+import main.phillips.rohan.battleship.board.OrientationInfo;
 
 public class CoordinatesTests {
    
@@ -15,8 +13,8 @@ public class CoordinatesTests {
    @DisplayName("Get column letter")
    public void getLetter(){
       
-      Optional<Column> col = Coordinates.Column.get(1);
-      assertEquals("B" , col.get().toString());
+     String col = Coordinates.Column.get(1);
+      assertEquals("B" , col);
    }
 
    @Test
@@ -53,13 +51,33 @@ public class CoordinatesTests {
    @Test
    @DisplayName("Test Orientation")
    public void testOrientation(){
-      assertEquals(true, Coordinates.isValidOrientation("A1", "A4", 10));
-      assertEquals(true, Coordinates.isValidOrientation("A1", "D1", 10));
+      assertEquals(true, Coordinates.isValidOrientation("A1", "A4", 10).getIsValid());
+      assertEquals(true, Coordinates.isValidOrientation("A1", "D1", 10).getIsValid());
 
-      assertEquals(false, Coordinates.isValidOrientation("A1", "b4", 10));
+      assertEquals(false, Coordinates.isValidOrientation("A1", "b4", 10).getIsValid());
 
-      assertEquals(false, Coordinates.isValidOrientation("A7", "a11", 10));
-      assertEquals(false, Coordinates.isValidOrientation("A0", "a4", 10));
-      assertEquals(false, Coordinates.isValidOrientation("F7", "l7", 10));
+      assertEquals(false, Coordinates.isValidOrientation("A7", "a11", 10).getIsValid());
+      assertEquals(false, Coordinates.isValidOrientation("A0", "a4", 10).getIsValid());
+      assertEquals(false, Coordinates.isValidOrientation("F7", "l7", 10).getIsValid());
+   }
+
+   @Test
+   @DisplayName("Verify Orientation Info")
+   public void testOrientationInfo(){
+      OrientationInfo info = new OrientationInfo(false, "A", 1, "B", 2);
+      assertEquals("A", info.getColumn(1));
+      assertEquals(1, info.getRow(1));
+      assertEquals("B", info.getColumn(2));
+      assertEquals(2, info.getRow(2));
+
+      assertEquals(false, info.getIsValid());
+      
+   }
+
+   @Test
+   @DisplayName("Test get Coordinate Pair")
+   public void testCoordinatePair(){
+      assertEquals("A1", Coordinates.getCoordinatePair(0, 0));
+      assertEquals("C5", Coordinates.getCoordinatePair(4, 2));
    }
 }
