@@ -64,16 +64,17 @@ public class BattleshipGame {
 	}
 
 	public void selectShips(Player player){
-		int selected = -1;
-		int temp;
+		int selected;
 		System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
 		while(Ship.ShipType.getList().size() != player.shipList().size()){
 			List<String> diff = Ship.ShipType.getList();
 			diff.removeAll(player.shipList());
 			diff.forEach(s -> System.out.println((diff.indexOf(s) + 1) + ": " + s));
-			temp = Integer.parseInt(userInput.nextLine());
-			Ship ship = buildShip(diff.toArray()[temp - 1].toString());
-			player.addShip(ship);
+			selected = Integer.parseInt(userInput.nextLine());
+			if(selected > 0 && selected <= diff.size()){
+				Ship ship = buildShip(diff.toArray()[selected - 1].toString());
+				player.addShip(ship);
+			}			
 		}
 		
 	}
