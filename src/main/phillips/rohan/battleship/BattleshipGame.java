@@ -22,6 +22,7 @@ public class BattleshipGame {
 		game.initGame(game.getUserGridSize());
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
+			game.player1.getPieceBoard().drawBoard();
 			while(game.inProgress){
 				game.inProgress = false;
 			}

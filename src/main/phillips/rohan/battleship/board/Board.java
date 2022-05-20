@@ -1,6 +1,8 @@
 package main.phillips.rohan.battleship.board;
 
+import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.board.Coordinates.Column;
+import main.phillips.rohan.battleship.ships.Battleship;
 import main.phillips.rohan.battleship.ships.Ship;
 
 public class Board {
@@ -9,7 +11,12 @@ public class Board {
 
    public static void main(String[] args) {
       Board board = new Board(10);
-      BoardPosition position = board.getPosition("A1");
+      Battleship ship = new Battleship();
+      CoordinateInput input = new CoordinateInput("A1", "a4");
+      ship.setStartCoordinate(input.getStart());
+      ship.setEndCoordinate(input.getEnd());
+      ship.setCoordinateList(input.getCoordinateList());
+      board.updateBoardShipCoordinates(ship);
       board.drawBoard();
    }
 
@@ -24,11 +31,32 @@ public class Board {
       initBoard();
    }
 
+   private static String addPadding(String str){
+      if(str.length() == 1){
+         return " " + str + " ";
+      } else if(str.length() == 2){
+         return str + " ";
+      } else {
+         return str.substring(0, 3);
+      }
+   }
+
    public void drawBoard(){
       for(var row = 0; row < gridSize; row++){
-         if(row != 0){
-            System.out.println("--".repeat(gridSize));
+         if(row != 0){            
+            System.out.println("   " + "---".repeat(gridSize) + "-".repeat(gridSize - 1));
+         } else {
+            System.out.print("   ");
+            for(var col = 0; col < gridSize; col++){
+               if(col != 0){
+                  System.out.print(" ");
+               }               
+               System.out.print(addPadding(Column.get(col)));
+            }
+            System.out.println();
+            System.out.println("   ".repeat(gridSize) + " ".repeat(gridSize - 1));
          }
+         System.out.print(addPadding(String.valueOf((row + 1))));
          for(var col = 0; col < gridSize; col++){
             if(col != 0){
                System.out.print("|");
@@ -44,14 +72,16 @@ public class Board {
       int[] coordinates = Coordinates.getCoordinates(str, gridSize);
       BoardPosition position = positions[coordinates[0]][coordinates[1]];
       if(position.getIsEmpty()){
-         return "O";
+         return addPadding("O");
       } else if(position.getIsHit()){
-         return "H";
+         return addPadding("H");
       } else if(position.getIsGuessed()){
-         return "G";
+         return addPadding("G");
       }
-      return "X";
+      return addPadding(position.getShip().getShipType().name());
    }
+
+   
 
    public BoardPosition getPosition(String coordinate){
       int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
