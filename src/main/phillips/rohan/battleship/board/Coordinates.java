@@ -47,8 +47,8 @@ public class Coordinates {
 
    public static int[] getCoordinates(String coord, int gridSize){
       int[] willReturn = new int[] {-1, -1};
-      if(isValidPair(coord, gridSize)){
-         String col = getColumn(coord);
+      String col = getColumn(coord);
+      if(isValidPair(coord, gridSize)){         
          int row = getRow(coord);
          if(coord.length() >= 2){
             willReturn[0] = Column.valueOf(col).getColumnNumber();
@@ -77,12 +77,19 @@ public class Coordinates {
       return new OrientationInfo(false, "", 0, "", 0);
    } 
 
-   private static String getColumn(String str){
+   public static String getColumn(String str){
       return str.substring(0, 1).toUpperCase();
    }
 
-   private static int getRow(String str){
-      return Integer.parseInt(str.substring(1)) - 1;
+   public static int getRow(String str){
+      int row;
+      try{
+         row = Integer.parseInt(str.substring(1)) - 1;
+      }
+      catch(NumberFormatException e){
+         row = -1;
+      }
+      return row;
    }
 
    private static boolean isValidColumn(String str, int gridSize){
