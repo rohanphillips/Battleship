@@ -109,6 +109,7 @@ public class BattleshipGame {
 			} else {
 				newShip.setStartCoordinate(input.getStart());
 				newShip.setEndCoordinate(input.getEnd());
+				newShip.setCoordinateList(input.getCoordinateList());
 				if(!player.getPieceBoard().canPlaceShip(newShip)){
 					System.out.println("Location selected conflicts with another ship placement, please select a new location");
 					input.reset();

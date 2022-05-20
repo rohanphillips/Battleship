@@ -10,6 +10,7 @@ public class Ship {
    private BoardPosition[] positions;
    private String startCoordinate;
    private String endCoordinate;
+   private List<String> coordinateList;
 
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
@@ -69,6 +70,14 @@ public class Ship {
 
    public String getEndCoordinate(){
       return endCoordinate;
+   }
+
+   public void setCoordinateList(List<String> list){
+      coordinateList = list;
+   }
+
+   public List<String> getCoordinateList(){
+      return coordinateList;
    }
 
 }

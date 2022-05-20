@@ -102,6 +102,10 @@ public class Board {
       return true;
    }
 
+   public void updateBoardShipCoordinates(Ship ship){
+      ship.getCoordinateList().forEach(c -> setPositionEmpty(c, false));
+   }
+
    private void initBoard(){
       for(var i = 0; i < gridSize; i++){
          for(var j = 0; j < gridSize; j++){

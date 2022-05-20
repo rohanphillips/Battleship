@@ -67,6 +67,7 @@ public class Player {
    }
 
    public void addShip(Ship ship){
+      pieceBoard.updateBoardShipCoordinates(ship);
       ships.add(ship);
    }
 
