@@ -9,7 +9,7 @@ public class Board {
 
    public static void main(String[] args) {
       Board board = new Board(10);
-      BoardPosition position = board.getPosition(0, 0);
+      BoardPosition position = board.getPosition("A1");
       board.drawBoard();
    }
 
@@ -53,32 +53,33 @@ public class Board {
       return "X";
    }
 
-   public BoardPosition getPosition(int x, int y){
-      return positions[x][y];
+   public BoardPosition getPosition(String coordinate){
+      int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
+      return positions[coordinates[0]][coordinates[1]];
    }
 
    public int getGridSize(){
       return gridSize;
    }
 
-   public boolean isPositionEmpty(String coordinate){
-      int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
-      return getPosition(coordinates[0], coordinates[1]).getIsEmpty();
+   public void setPositionShip(String coordinate, Ship ship){
+      getPosition(coordinate).setShip(ship);
+   }
+
+   public boolean isPositionEmpty(String coordinate){      
+      return getPosition(coordinate).getIsEmpty();
    }
 
    public void setPositionEmpty(String coordinate, boolean setEmpty){
-      int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
-      getPosition(coordinates[0], coordinates[1]).setIsEmpty(setEmpty);
+      getPosition(coordinate).setIsEmpty(setEmpty);
    }
 
    public boolean isPositionHit(String coordinate){
-      int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
-      return getPosition(coordinates[0], coordinates[1]).getIsHit();
+      return getPosition(coordinate).getIsHit();
    }
 
    public boolean isPositionGuessed(String coordinate){
-      int[] coordinates = Coordinates.getCoordinates(coordinate, gridSize);
-      return getPosition(coordinates[0], coordinates[1]).getIsGuessed();
+      return getPosition(coordinate).getIsGuessed();
    }
 
    public boolean canPlaceShip(Ship ship){
@@ -103,7 +104,10 @@ public class Board {
    }
 
    public void updateBoardShipCoordinates(Ship ship){
-      ship.getCoordinateList().forEach(c -> setPositionEmpty(c, false));
+      ship.getCoordinateList().forEach(c -> {
+         setPositionEmpty(c, false);
+         setPositionShip(c, ship);
+      });
    }
 
    private void initBoard(){
