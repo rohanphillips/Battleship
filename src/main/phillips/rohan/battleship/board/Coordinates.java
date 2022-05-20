@@ -75,7 +75,7 @@ public class Coordinates {
          return new OrientationInfo((col1.equals(col2) && row1 != row2) || (row1 == row2 && !col1.equals(col2)), col1, row1, col2, row2);
       } 
       return new OrientationInfo(false, "", 0, "", 0);
-   }   
+   } 
 
    private static String getColumn(String str){
       return str.substring(0, 1).toUpperCase();

@@ -80,20 +80,31 @@ public class BattleshipGame {
 	}
 
 	public Ship buildShip(String ship){
+		Ship newShip;
+		CoordinateInput input = new CoordinateInput();
 		switch(ship){
 			case "BATTLESHIP":
-				return new Battleship();
+				newShip = new Battleship();
+				break;
 			case "CARRIER":
-				return new Carrier();
+				newShip = new Carrier();
+				break;
 			case "CRUISER":
-				return new Cruiser();
+				newShip = new Cruiser();
+				break;
 			case "DESTROYER":
-				return new Destroyer();
+				newShip = new Destroyer();
+				break;
 			case "SUBMARINE":
-				return new Submarine();
+				newShip = new Submarine();
+				break;
 			default:
-				return new Ship();
+				newShip = new Ship();
 		}
+		while(!input.isComplete()){
+			input.getCoordinates(userInput, gridSize);
+		}
+		return newShip;
 	}
 
 	public boolean getInitialized(){
