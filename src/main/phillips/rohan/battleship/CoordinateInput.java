@@ -27,14 +27,19 @@ public class CoordinateInput{
          } else if(Coordinates.isValidPair(start, gridSize) && Coordinates.isValidPair(end, gridSize)){
             if(!Coordinates.isValidOrientation(start, end, gridSize).getIsValid()){
                System.out.println("Please define a correct orientation, i.e A1..A3");
-               start = "";
-               end = "";
+               reset();
             } else {
                isComplete = true;
                length = Coordinates.getOrientationLength(start, end);
             }
          }
       }
+   }
+
+   public void reset(){
+      isComplete = false;
+      start = "";
+      end = "";
    }
 
    public void setIsComplete(boolean complete){
@@ -51,5 +56,9 @@ public class CoordinateInput{
 
    public String getEnd(){
       return end;
+   }
+
+   public int getLength(){
+      return length;
    }
 }

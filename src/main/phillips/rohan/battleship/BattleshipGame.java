@@ -80,7 +80,7 @@ public class BattleshipGame {
 		
 	}
 
-	public Ship buildShip(String ship){
+	public Ship buildShip(Player player, String ship){
 		Ship newShip;
 		CoordinateInput input = new CoordinateInput();
 		switch(ship){
@@ -104,9 +104,10 @@ public class BattleshipGame {
 		}
 		while(!input.isComplete()){
 			input.getCoordinates(userInput, gridSize);
-			// if(newShip.getShipLength() != (Coordinates.getRow(input.getStart()))){
-
-			// }
+			if(newShip.getShipLength() != (input.getLength())){				
+				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
+				input.reset();
+			}
 		}
 		return newShip;
 	}
