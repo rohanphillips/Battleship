@@ -3,6 +3,7 @@ package main.phillips.rohan.battleship;
 import java.util.*;
 
 import main.phillips.rohan.battleship.board.Coordinates;
+import main.phillips.rohan.battleship.board.Coordinates.Column;
 
 public class CoordinateInput{
    private boolean isComplete;
@@ -14,6 +15,12 @@ public class CoordinateInput{
       this.isComplete = false;
       this.start = "";
       this.end = "";
+   }
+
+   public CoordinateInput(String start, String end){
+      this.start = start;
+      this.end = end;
+      this.isComplete = false;
    }
 
    public void getCoordinates(Scanner userInput, int gridSize){      
@@ -34,6 +41,27 @@ public class CoordinateInput{
             }
          }
       }
+   }
+
+   public List<String> getCoordinateList(){
+      int col1 = Column.valueOf(Coordinates.getColumn(start)).getColumnNumber();
+      int col2 = Column.valueOf(Coordinates.getColumn(end)).getColumnNumber();
+      int row1 = Coordinates.getRow(start) + 1;
+      int row2 = Coordinates.getRow(end) + 1;
+
+      List<String> list = new ArrayList<>();
+
+      if(col1 == col2){
+         String column = Column.get(col1);
+         for(var i = row1; i <= row2; i++){
+            list.add(column + i);
+         }
+      } else if(row1 == row2) {
+         for(var i = col1; i <= col2; i++){
+            list.add(Column.get(i) + (row1));
+         }
+      }
+      return list;
    }
 
    public void reset(){

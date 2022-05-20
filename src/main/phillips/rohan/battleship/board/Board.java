@@ -1,6 +1,7 @@
 package main.phillips.rohan.battleship.board;
 
 import main.phillips.rohan.battleship.board.Coordinates.Column;
+import main.phillips.rohan.battleship.ships.Ship;
 
 public class Board {
    private int gridSize;
@@ -80,16 +81,9 @@ public class Board {
       return getPosition(coordinates[0], coordinates[1]).getIsGuessed();
    }
 
-   public boolean placeShip(String ship, String start, String end){
-      OrientationInfo info = Coordinates.isValidOrientation(start, end, gridSize);
-      if(info.getIsValid()){
-         if(canPlace(info)){
-            
-         }     
-         return true;    
-      } else {
-         return false;
-      }
+   public boolean canPlaceShip(Ship ship){
+      OrientationInfo info = Coordinates.isValidOrientation(ship.getStartCoordinate(), ship.getEndCoordinate(), gridSize);
+      return info.getIsValid() && canPlace(info);
    }
 
    public boolean canPlace(OrientationInfo info){

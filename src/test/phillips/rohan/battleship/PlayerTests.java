@@ -2,8 +2,6 @@ package test.phillips.rohan.battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -11,7 +9,6 @@ import java.util.*;
 
 import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.ships.Ship;
-import main.phillips.rohan.battleship.ships.Ship.ShipType;
 import main.phillips.rohan.battleship.ships.Carrier;
 import main.phillips.rohan.battleship.ships.Destroyer;
 

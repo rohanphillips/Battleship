@@ -2,7 +2,6 @@ package main.phillips.rohan.battleship;
 
 import java.util.*;
 
-import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.ships.Battleship;
 import main.phillips.rohan.battleship.ships.Carrier;
 import main.phillips.rohan.battleship.ships.Cruiser;
@@ -110,6 +109,10 @@ public class BattleshipGame {
 			} else {
 				newShip.setStartCoordinate(input.getStart());
 				newShip.setEndCoordinate(input.getEnd());
+				if(!player.getPieceBoard().canPlaceShip(newShip)){
+					System.out.println("Location selected conflicts with another ship placement, please select a new location");
+					input.reset();
+				}
 			}
 		}
 		return newShip;
