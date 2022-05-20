@@ -8,6 +8,8 @@ import main.phillips.rohan.battleship.board.BoardPosition;
 public class Ship {
    private ShipType shipType;
    private BoardPosition[] positions;
+   private String startCoordinate;
+   private String endCoordinate;
 
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
@@ -29,6 +31,8 @@ public class Ship {
 
    public Ship(){
       this.shipType = Ship.ShipType.NOTSET;
+      this.startCoordinate = "";
+      this.endCoordinate = "";
    }
 
    public void setShipType(ShipType shiptype){
@@ -50,4 +54,21 @@ public class Ship {
    public BoardPosition[] getPositions(){
       return positions;
    }
+
+   public void setStartCoordinate(String start){
+      startCoordinate = start;
+   }
+
+   public String getStartCoordinate(){
+      return startCoordinate;
+   }
+
+   public void setEndCoordinate(String end){
+      endCoordinate = end;
+   }
+
+   public String getEndCoordinate(){
+      return endCoordinate;
+   }
+
 }

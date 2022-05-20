@@ -3,8 +3,6 @@ package test.phillips.rohan.battleship.board;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.board.OrientationInfo;

@@ -36,6 +36,34 @@ public class ShipTests {
    }
 
    @Test
+   @DisplayName("Test Start Coordinate")
+   public void testStartCoordinate(){
+      Ship ship = new Ship();
+      
+      /**
+       * Check startCoordinate initialized
+       */
+      assertEquals("", ship.getStartCoordinate());
+
+      ship.setStartCoordinate("A1");
+      assertEquals("A1", ship.getStartCoordinate());
+   }
+
+   @Test
+   @DisplayName("Test End Coordinate")
+   public void testEndCoordinate(){
+      Ship ship = new Ship();
+      
+      /**
+       * Check startCoordinate initialized
+       */
+      assertEquals("", ship.getEndCoordinate());
+
+      ship.setEndCoordinate("A1");
+      assertEquals("A1", ship.getEndCoordinate());
+   }
+
+   @Test
    @DisplayName("Test Carrier")
    public void testCarrier(){
       Carrier ship = new Carrier();
