@@ -73,7 +73,7 @@ public class BattleshipGame {
 			diff.forEach(s -> System.out.println((diff.indexOf(s) + 1) + ": " + s));
 			selected = Integer.parseInt(userInput.nextLine());
 			if(selected > 0 && selected <= diff.size()){
-				Ship ship = buildShip(diff.toArray()[selected - 1].toString());
+				Ship ship = buildShip(player, diff.toArray()[selected - 1].toString());
 				player.addShip(ship);
 			}			
 		}
@@ -107,6 +107,9 @@ public class BattleshipGame {
 			if(newShip.getShipLength() != (input.getLength())){				
 				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
 				input.reset();
+			} else {
+				newShip.setStartCoordinate(input.getStart());
+				newShip.setEndCoordinate(input.getEnd());
 			}
 		}
 		return newShip;
