@@ -11,6 +11,7 @@ public class CoordinatesTests {
    
    @Test
    @DisplayName("Get column letter")
+   
    public void getLetter(){
       
      String col = Coordinates.Column.get(1);
