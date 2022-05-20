@@ -66,8 +66,9 @@ public class BattleshipGame {
 
 	public void selectShips(Player player){
 		int selected;
-		System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
+		
 		while(Ship.ShipType.getList().size() != player.shipList().size()){
+			System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
 			List<String> diff = Ship.ShipType.getList();
 			diff.removeAll(player.shipList());
 			diff.forEach(s -> System.out.println((diff.indexOf(s) + 1) + ": " + s));
@@ -75,7 +76,8 @@ public class BattleshipGame {
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(player, diff.toArray()[selected - 1].toString());
 				player.addShip(ship);
-			}			
+			}
+			player.getPieceBoard().drawBoard();			
 		}
 		
 	}
