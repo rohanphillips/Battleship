@@ -92,6 +92,15 @@ public class Coordinates {
       return row;
    }
 
+   public static int getOrientationLength(String start, String end){
+      String alphabet = "abcdefghijklmnopqrstuvwxyz";
+      int col1 = alphabet.indexOf(getColumn(start).toLowerCase());
+      int col2 = alphabet.indexOf(getColumn(end).toLowerCase());
+      int row1 = getRow(start);
+      int row2 = getRow(end);
+      return (Math.max(Math.abs(col1 - col2), Math.abs(row1 - row2))) + 1;
+   }
+
    private static boolean isValidColumn(String str, int gridSize){
       try{
          int col = Column.valueOf(str).columnNumber;

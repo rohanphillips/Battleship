@@ -2,6 +2,7 @@ package main.phillips.rohan.battleship;
 
 import java.util.*;
 
+import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.ships.Battleship;
 import main.phillips.rohan.battleship.ships.Carrier;
 import main.phillips.rohan.battleship.ships.Cruiser;
@@ -103,6 +104,9 @@ public class BattleshipGame {
 		}
 		while(!input.isComplete()){
 			input.getCoordinates(userInput, gridSize);
+			// if(newShip.getShipLength() != (Coordinates.getRow(input.getStart()))){
+
+			// }
 		}
 		return newShip;
 	}

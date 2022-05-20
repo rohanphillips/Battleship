@@ -104,4 +104,12 @@ public class CoordinatesTests {
       assertEquals("1", Coordinates.getColumn("11"));
    }
 
+   @Test
+   @DisplayName("Test Orientation Lengths")
+   public void testOrientationLengths(){
+      assertEquals(4, Coordinates.getOrientationLength("A1", "A4"));
+
+      assertEquals(4, Coordinates.getOrientationLength("A1", "D1"));
+   }
+
 }

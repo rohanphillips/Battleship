@@ -8,6 +8,7 @@ public class CoordinateInput{
    private boolean isComplete;
    private String start = "";
    private String end = "";
+   private int length;
 
    public CoordinateInput(){
       this.isComplete = false;
@@ -24,9 +25,20 @@ public class CoordinateInput{
             System.out.println("Enter a valid end coordinate:");
             end = userInput.nextLine();
          } else if(Coordinates.isValidPair(start, gridSize) && Coordinates.isValidPair(end, gridSize)){
-            isComplete = true;
+            if(!Coordinates.isValidOrientation(start, end, gridSize).getIsValid()){
+               System.out.println("Please define a correct orientation, i.e A1..A3");
+               start = "";
+               end = "";
+            } else {
+               isComplete = true;
+               length = Coordinates.getOrientationLength(start, end);
+            }
          }
       }
+   }
+
+   public void setIsComplete(boolean complete){
+      isComplete = complete;
    }
 
    public boolean isComplete(){
