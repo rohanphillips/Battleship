@@ -8,6 +8,7 @@ import main.phillips.rohan.battleship.ships.Cruiser;
 import main.phillips.rohan.battleship.ships.Destroyer;
 import main.phillips.rohan.battleship.ships.Ship;
 import main.phillips.rohan.battleship.ships.Submarine;
+import main.phillips.rohan.battleship.menu.*;
 
 public class BattleshipGame {
 
@@ -17,17 +18,53 @@ public class BattleshipGame {
 	private Scanner userInput;
 	private Player player1;
 	private Player player2;
+	private List<String> messages;
 	public static void main(String[] args) {
+		Menu menu = new MainMenu();
 		BattleshipGame game = new BattleshipGame();
-		game.initGame(game.getUserGridSize());
+
+		while(!menu.isExitSelected() && !game.getInitialized()){
+			switch(menu.getSelection()){
+				case 1:
+					game.initGame(game.getUserGridSize());
+					break;
+				case 2:
+					game.player1.gatherInfo(game.userInput);
+					break;
+				case 3:
+					game.player2.gatherInfo(game.userInput);
+					break;
+				case 4:
+					game.selectShips(game.player1);
+					break;
+				case 5:
+					game.selectShips(game.player2);
+					break;
+				case 6:
+					if(game.canPlay()){
+						game.setInitialized(true);
+					} else {
+						System.out.println("Can't play yet, everything not ready yet");
+						game.messages.forEach(m -> System.out.println((game.messages.indexOf(m) + 1) + ": " + m + "\n"));
+					}
+					break;
+				case 7:
+					System.out.println("Bye!  Hope you had a good time");
+					menu.setIsExitSelected(true);
+					break;
+				default:
+					System.out.println("Invalid Menu Selection, please reselect");					
+					break;
+			}
+		}
+		
+		
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
 			game.player1.getPieceBoard().drawBoard();
 			while(game.inProgress){
 				game.inProgress = false;
 			}
-		} else {
-			System.out.println("Game did not initialize");
 		}
 	}
 
@@ -50,34 +87,39 @@ public class BattleshipGame {
 		return size;
 	}
 
-	public void initGame(int gridsize){			
-		setInitialized(true);
+	public void initGame(int gridsize){		
 		if(!isGridSizeValid(gridsize)){
 			setInitialized(false);
 		}
-		player1 = new Player(gridsize, 1, false);
-		player1.gatherInfo(userInput);
+		player1 = new Player(gridsize, 1, false);		
 		player2 = new Player(gridsize, 2, false);
-		player2.gatherInfo(userInput);
-		selectShips(player1);
+	}
 
-		setInProgress(getInitialized());
+	public boolean canPlay(){
+		messages = new ArrayList<>();
+		boolean player1Ready = Ship.ShipType.getList().size() == player1.shipList().size();
+		if(!player1Ready) messages.add("Player 1 has not selected all ships");
+		return messages.isEmpty();
 	}
 
 	public void selectShips(Player player){
 		int selected;
+		boolean existSelected = false;
 		
-		while(Ship.ShipType.getList().size() != player.shipList().size()){
+		while(Ship.ShipType.getList().size() != player.shipList().size() && !existSelected){
 			System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
 			List<String> diff = Ship.ShipType.getList();
 			diff.removeAll(player.shipList());
-			diff.forEach(s -> System.out.println((diff.indexOf(s) + 1) + ": " + s));
-			selected = Integer.parseInt(userInput.nextLine());
+			Menu menu = new Menu(userInput, diff, "Exit");
+			selected = menu.getSelection();
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(player, diff.toArray()[selected - 1].toString());
 				player.addShip(ship);
+				player.getPieceBoard().drawBoard();
+			} else {
+				existSelected = menu.isExitSelected();
 			}
-			player.getPieceBoard().drawBoard();			
+						
 		}
 		
 	}
