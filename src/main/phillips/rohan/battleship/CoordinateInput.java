@@ -23,6 +23,39 @@ public class CoordinateInput{
       this.isComplete = false;
    }
 
+   public List<String> getCoordinatesFromSingle(Scanner userInput, int gridSize, int shipLength){
+      List<String> list = new ArrayList<>();
+      int row1;
+      int row2;
+      int col1;
+      int col2;
+      String temp;
+
+      while(!isComplete){
+         start = userInput.nextLine();
+         if(Coordinates.isValidPair(start, gridSize)){
+            row1 = Coordinates.getRow(start);
+            col1 = Column.valueOf(Coordinates.getColumn(start)).getColumnNumber();
+            row2 = row1 + shipLength -1;
+            col2 = col1 + shipLength - 1;
+            temp = Column.get(col1) + row2;
+            if(Coordinates.isValidPair(temp, gridSize)){               
+               list.add(createItem(start, temp));
+            }
+            temp = Column.get(col2) + row1;
+            if(Coordinates.isValidPair(temp, gridSize)){
+               list.add(createItem(start, temp));
+            }
+            isComplete = true;
+         }         
+      }
+      return list;
+   }
+
+   private String createItem(String start, String end){
+      return start + ".." + end;
+   }
+
    public void getCoordinates(Scanner userInput, int gridSize){      
       while(!isComplete){
          if(!Coordinates.isValidPair(start, gridSize)){
