@@ -4,6 +4,7 @@ import java.util.*;
 
 import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.board.Coordinates.Column;
+import main.phillips.rohan.battleship.menu.Menu;
 import test.phillips.rohan.battleship.board.Pair;
 
 public class CoordinateInput{
@@ -36,7 +37,7 @@ public class CoordinateInput{
       int col2;
       String temp;
 
-      while(!isComplete){
+      while(!Coordinates.isValidPair(pair.getStart(), gridSize)){
          pair.setStart(userInput.nextLine());
          if(Coordinates.isValidPair(pair.getStart(), gridSize)){
             row1 = Coordinates.getRow(pair.getStart());
@@ -51,20 +52,24 @@ public class CoordinateInput{
             if(Coordinates.isValidPair(temp, gridSize) && Coordinates.isValidOrientation(pair.getStart(), temp, gridSize).getIsValid()){
                list.add(new Pair(pair.getStart(), temp));
             }
-            isComplete = true;
          }         
       }
       return list;
    }
 
-   public void getCoordinates(Scanner userInput, int gridSize){      
+   public void getCoordinates(Scanner userInput, int gridSize, int shipLength){      
+      List<Pair> list;
+      Menu menu;
+
       while(!isComplete){
          if(!Coordinates.isValidPair(pair.getStart(), gridSize)){
             System.out.println("Enter a valid starting coordinate:");
-            pair.setStart(userInput.nextLine());
-         } else if(!Coordinates.isValidPair(pair.getEnd(), gridSize)){
-            System.out.println("Enter a valid end coordinate:");
-            pair.setEnd(userInput.nextLine());
+            list = getCoordinatesFromSingle(userInput, gridSize, shipLength);
+            menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
+            int selection = menu.getSelection();
+            if(selection <= list.size()){
+                pair = list.get(selection -1);                
+            }
          } else if(Coordinates.isValidPair(pair.getStart(), gridSize) && Coordinates.isValidPair(pair.getEnd(), gridSize)){
             if(!Coordinates.isValidOrientation(pair.getStart(), pair.getEnd(), gridSize).getIsValid()){
                System.out.println("Please define a correct orientation, i.e A1..A3");

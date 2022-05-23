@@ -1,5 +1,8 @@
 package test.phillips.rohan.battleship.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pair {
    private String start;
    private String end;
@@ -28,5 +31,11 @@ public class Pair {
 
    public String getEnd(){
       return end;
+   }
+
+   public static List<String> createMenuPairList(List<Pair> pairs){
+      List<String> menu = new ArrayList<>();
+         pairs.forEach(p -> menu.add(p.getStart() + ".." + p.getEnd()));
+      return menu;
    }
 }

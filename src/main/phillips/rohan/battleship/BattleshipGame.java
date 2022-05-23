@@ -146,9 +146,8 @@ public class BattleshipGame {
 			default:
 				newShip = new Ship();
 		}
-		while(!input.isComplete()){
-			
-			input.getCoordinates(userInput, gridSize);
+		while(!input.isComplete()){			
+			input.getCoordinates(userInput, gridSize, newShip.getShipLength());
 			if(newShip.getShipLength() != (input.getLength())){				
 				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
 				input.reset();
