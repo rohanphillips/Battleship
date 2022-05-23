@@ -23,8 +23,8 @@ public class CoordinateInputTests {
    public void testInitialized(){
 
       assertEquals(false, input.isComplete());
-      assertEquals("", input.getStart());
-      assertEquals("", input.getEnd());
+      assertEquals("", input.getPair().getStart());
+      assertEquals("", input.getPair().getEnd());
    }
 
    @Test

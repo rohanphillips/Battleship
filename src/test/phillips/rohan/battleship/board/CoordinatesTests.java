@@ -1,13 +1,40 @@
 package test.phillips.rohan.battleship.board;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.BiConsumer;
+
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.board.OrientationInfo;
 
 public class CoordinatesTests {
+
+   public static <E, A> void assertListEquals(BiConsumer<E, A> asserter, List<E> expected, List<A> actual) throws AssertionError {
+      assertEquals(expected.size(),
+              actual.size());
+  
+      for (int i = 0; i < expected.size(); i++) {
+          try {
+              asserter.accept(expected.get(i), actual.get(i));
+          } catch (AssertionError e) {
+              throw e;
+          }
+      }
+  }
+
+   private void assertPairEqual(Pair expected, Pair actual){
+      assertEquals(expected.getStart(), actual.getStart());
+      assertEquals(expected.getEnd(), actual.getEnd());
+   }
    
    @Test
    @DisplayName("Get column letter")   
@@ -105,9 +132,87 @@ public class CoordinatesTests {
    @Test
    @DisplayName("Test Orientation Lengths")
    public void testOrientationLengths(){
-      assertEquals(4, Coordinates.getOrientationLength("A1", "A4"));
+      
+      assertEquals(4, Coordinates.getOrientationLength(new Pair("A1", "A4")));
 
-      assertEquals(4, Coordinates.getOrientationLength("A1", "D1"));
+      assertEquals(4, Coordinates.getOrientationLength(new Pair("A1", "D1")));
    }
+
+   /**
+    * Test that two pairs are returned for a valid starting location, one for horizontal, one for vertical
+    */
+   @Test
+   @DisplayName("Test getCoordinateFromSingle Valid")
+   public void testGetCoordinateFromSingleValid(){
+      String  loc = "A1";
+      CoordinateInput c = new CoordinateInput();
+      InputStream stdin = System.in;
+      ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
+      List<Pair> list = new ArrayList<>();      
+
+      System.setIn(stream);
+      Scanner scanner = new Scanner(System.in);
+      
+      list.add(new Pair("A1", "A4"));
+      list.add(new Pair("A1", "D1"));
+
+      List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+
+      assertListEquals(this::assertPairEqual, list, result);
+      scanner.close();
+            
+      System.setIn(stdin);
+
+   }
+
+   /**
+    * Test that only one pair is returned, a valid horizontal location without a vertical
+    */
+   @Test
+   @DisplayName("Test getCoordinateFromSingle InValid Vertical")
+   public void testGetCoordinateFromSingleInvalidV(){
+      String  loc = "A8";
+      CoordinateInput c = new CoordinateInput();
+      InputStream stdin = System.in;
+      ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
+      List<Pair> list = new ArrayList<>();      
+
+      System.setIn(stream);
+      Scanner scanner = new Scanner(System.in);
+      
+      list.add(new Pair("A8", "D8"));
+
+      List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+
+      assertListEquals(this::assertPairEqual, list, result);
+      scanner.close();
+            
+      System.setIn(stdin);
+   }
+
+   /**
+    * Test that only one pair is returned, a valid vertical location without a vertical
+    */
+    @Test
+    @DisplayName("Test getCoordinateFromSingle InValid Horizontal")
+    public void testGetCoordinateFromSingleInvalidH(){
+       String  loc = "H3";
+       CoordinateInput c = new CoordinateInput();
+       InputStream stdin = System.in;
+       ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
+       List<Pair> list = new ArrayList<>();      
+ 
+       System.setIn(stream);
+       Scanner scanner = new Scanner(System.in);
+       
+       list.add(new Pair("H3", "H6"));
+ 
+       List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+ 
+       assertListEquals(this::assertPairEqual, list, result);
+       scanner.close();
+             
+       System.setIn(stdin);
+    }
 
 }

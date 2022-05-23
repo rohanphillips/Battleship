@@ -3,6 +3,8 @@ package main.phillips.rohan.battleship.board;
 
 import java.util.Arrays;
 
+import test.phillips.rohan.battleship.board.Pair;
+
 public class Coordinates {
    
    private Coordinates() {
@@ -92,12 +94,12 @@ public class Coordinates {
       return row;
    }
 
-   public static int getOrientationLength(String start, String end){
+   public static int getOrientationLength(Pair pair){
       String alphabet = "abcdefghijklmnopqrstuvwxyz";
-      int col1 = alphabet.indexOf(getColumn(start).toLowerCase());
-      int col2 = alphabet.indexOf(getColumn(end).toLowerCase());
-      int row1 = getRow(start);
-      int row2 = getRow(end);
+      int col1 = alphabet.indexOf(getColumn(pair.getStart()).toLowerCase());
+      int col2 = alphabet.indexOf(getColumn(pair.getEnd()).toLowerCase());
+      int row1 = getRow(pair.getStart());
+      int row2 = getRow(pair.getEnd());
       return (Math.max(Math.abs(col1 - col2), Math.abs(row1 - row2))) + 1;
    }
 

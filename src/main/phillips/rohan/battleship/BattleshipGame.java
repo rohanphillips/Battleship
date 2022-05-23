@@ -153,8 +153,8 @@ public class BattleshipGame {
 				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
 				input.reset();
 			} else {
-				newShip.setStartCoordinate(input.getStart());
-				newShip.setEndCoordinate(input.getEnd());
+				newShip.setStartCoordinate(input.getPair().getStart());
+				newShip.setEndCoordinate(input.getPair().getEnd());
 				newShip.setCoordinateList(input.getCoordinateList());
 				if(!player.getPieceBoard().canPlaceShip(newShip)){
 					System.out.println("Location selected conflicts with another ship placement, please select a new location");
