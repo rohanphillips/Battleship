@@ -41,7 +41,7 @@ public class BattleshipGame {
 					game.selectShips(game.player2);
 					break;
 				case 6:
-					if(game.canPlay()){
+					if(game.initialized && game.canPlay()){
 						game.setInitialized(true);
 					} else {
 						System.out.println("Can't play yet, everything not ready yet");
@@ -70,6 +70,7 @@ public class BattleshipGame {
 
 	public BattleshipGame(){
 		userInput = new Scanner(System.in);
+		messages = new ArrayList<>();
 	}
 
 	public int getUserGridSize(){
@@ -93,6 +94,8 @@ public class BattleshipGame {
 		}
 		player1 = new Player(gridsize, 1, false);		
 		player2 = new Player(gridsize, 2, false);
+
+		setInProgress(true);
 	}
 
 	public boolean canPlay(){
