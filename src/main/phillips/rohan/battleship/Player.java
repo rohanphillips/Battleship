@@ -3,7 +3,10 @@ package main.phillips.rohan.battleship;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 import main.phillips.rohan.battleship.board.Board;
+import main.phillips.rohan.battleship.menu.PlayerMenu;
 import main.phillips.rohan.battleship.ships.Ship;
 
 public class Player {
@@ -23,18 +26,19 @@ public class Player {
    }
 
    public void gatherInfo(Scanner userInput){
-      String x = "";   
+      String x = "";  
       while(!isInitialized){
          System.out.println("Is Player " + this.playerNumber + " a computer? (Y/N)");
-         try{
-            x = userInput.nextLine();
-            if(x.equals("Y") || x.equals("y")){
+         PlayerMenu menu = new PlayerMenu();
+         menu.setupYesNo();
+         switch(menu.getSelection()){
+            case 2:
                setIsComputer(true);
-            }   
-            isInitialized = true;
-         }  catch (Exception nfe){
-               System.out.println(nfe);
+               break;
+            default:
+               setIsComputer(false);
          }
+         isInitialized = true;
       }
    }
 
@@ -64,6 +68,10 @@ public class Player {
 
    public boolean getIsInitialized(){
       return isInitialized;
+   }
+
+   public void setIsInitialized(boolean init){
+      isInitialized = init;
    }
 
    public void addShip(Ship ship){

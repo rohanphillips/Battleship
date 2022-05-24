@@ -27,10 +27,15 @@ public class Menu {
 
    public int getSelection(){
       int input = -1;
-      menuItems.forEach(s -> System.out.println((menuItems.indexOf(s) + 1) + ": " + s));
-      while(input == -1){
+      
+      while(input < 1 || input > menuItems.size()){
+         menuItems.forEach(s -> System.out.println((menuItems.indexOf(s) + 1) + ": " + s));
          try{
             input = Integer.parseInt(userInput.nextLine());
+         }
+         catch(NumberFormatException ex){
+            input = -1;
+            System.out.println("Invalid Input.");
          }
          finally{
             isExitSelected = input == menuItems.size();

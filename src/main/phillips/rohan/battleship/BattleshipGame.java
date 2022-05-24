@@ -29,9 +29,11 @@ public class BattleshipGame {
 					game.initGame(game.getUserGridSize());
 					break;
 				case 2:
+					game.player1.setIsInitialized(false);
 					game.player1.gatherInfo(game.userInput);
 					break;
 				case 3:
+					game.player2.setIsInitialized(false);
 					game.player2.gatherInfo(game.userInput);
 					break;
 				case 4:
