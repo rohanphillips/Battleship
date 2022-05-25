@@ -28,8 +28,8 @@ public class Player {
    public void gatherInfo(Scanner userInput){
       String x = "";  
       while(!isInitialized){
-         System.out.println("Is Player " + this.playerNumber + " a computer? (Y/N)");
          PlayerMenu menu = new PlayerMenu();
+         menu.setMenuHeader("Is Player " + this.playerNumber + " a computer? (Y/N)");
          menu.setupYesNo();
          switch(menu.getSelection()){
             case 2:

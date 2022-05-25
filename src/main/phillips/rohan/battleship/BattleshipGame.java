@@ -21,6 +21,7 @@ public class BattleshipGame {
 	private List<String> messages;
 	public static void main(String[] args) {
 		Menu menu = new MainMenu();
+		menu.setMenuHeader("Main Menu");
 		BattleshipGame game = new BattleshipGame();
 
 		while(!menu.isExitSelected() && !game.getInitialized()){
