@@ -1,5 +1,7 @@
 package main.phillips.rohan.battleship.board;
 
+import java.util.Random;
+
 import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.board.Coordinates.Column;
 import main.phillips.rohan.battleship.ships.Battleship;
@@ -18,6 +20,7 @@ public class Board {
       ship.setCoordinateList(input.getCoordinateList());
       board.updateBoardShipCoordinates(ship);
       board.drawBoard();
+      System.out.println(board.getRandomCoordinate());
    }
 
    public Board(int grid){
@@ -138,6 +141,13 @@ public class Board {
          setPositionEmpty(c, false);
          setPositionShip(c, ship);
       });
+   }
+
+   public String getRandomCoordinate(){
+      Random rand = new Random();
+      int row = rand.nextInt(10);
+      int col = rand.nextInt(10);
+      return Column.get(col) + row;
    }
 
    private void initBoard(){
