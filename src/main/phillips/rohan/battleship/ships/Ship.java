@@ -26,7 +26,7 @@ public class Ship {
       }
 
       public static List<String> getList(){
-         return EnumSet.allOf(ShipType.class).stream().filter(type -> !type.name().equals("NOTSET")).map(ShipType::name).collect(Collectors.toList());
+         return EnumSet.allOf(ShipType.class).stream().filter(type -> !type.name().equals("NOTSET")).map(s -> s + " (Length: " + s.length + ")").collect(Collectors.toList());
       }
    }
 
