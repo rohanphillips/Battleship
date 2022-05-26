@@ -2,10 +2,13 @@ package main.phillips.rohan.battleship.board;
 
 
 import java.util.Arrays;
+import java.util.Random;
 
 import test.phillips.rohan.battleship.board.Pair;
 
 public class Coordinates {
+   
+   private static Random rand = new Random();
    
    private Coordinates() {
       throw new IllegalStateException("Coordinates class");
@@ -102,6 +105,14 @@ public class Coordinates {
       int row2 = getRow(pair.getEnd());
       return (Math.max(Math.abs(col1 - col2), Math.abs(row1 - row2))) + 1;
    }
+
+   public static String getRandomCoordinate(int gridSize){      
+      int row = rand.nextInt(gridSize);
+      int col = rand.nextInt(gridSize);
+      return Column.get(col) + row;
+   }
+
+   
 
    private static boolean isValidColumn(String str, int gridSize){
       try{

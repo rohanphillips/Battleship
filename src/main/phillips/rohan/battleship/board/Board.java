@@ -21,7 +21,7 @@ public class Board {
       ship.setCoordinateList(input.getCoordinateList());
       board.updateBoardShipCoordinates(ship);
       board.drawBoard();
-      System.out.println(board.getRandomCoordinate());
+      System.out.println(Coordinates.getRandomCoordinate(board.gridSize));
    }
 
    public Board(int grid){
@@ -142,12 +142,6 @@ public class Board {
          setPositionEmpty(c, false);
          setPositionShip(c, ship);
       });
-   }
-
-   public String getRandomCoordinate(){      
-      int row = rand.nextInt(10);
-      int col = rand.nextInt(10);
-      return Column.get(col) + row;
    }
 
    private void initBoard(){

@@ -3,11 +3,10 @@ package main.phillips.rohan.battleship;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import main.phillips.rohan.battleship.board.Board;
 import main.phillips.rohan.battleship.menu.PlayerMenu;
-import main.phillips.rohan.battleship.ships.Ship;
+import main.phillips.rohan.battleship.menu.ShipMenu;
+import main.phillips.rohan.battleship.ships.*;
 
 public class Player {
    private int playerNumber;
@@ -16,17 +15,23 @@ public class Player {
    private Board pieceBoard;
    private Board guessBoard;
    private List<Ship> ships;
+   private int gridSize;
+   private static Scanner userInput;
 
-   public Player(int gridsize, int playerNumber, boolean isComputer){
-      this.pieceBoard = new Board(gridsize);
-      this.guessBoard = new Board(gridsize);
+   public Player(int gridSize, int playerNumber, boolean isComputer){
+      this.pieceBoard = new Board(gridSize);
+      this.guessBoard = new Board(gridSize);
       this.ships = new ArrayList<>();
       this.playerNumber = playerNumber;
       this.isComputer = isComputer;
+      this.gridSize = gridSize;
    }
 
-   public void gatherInfo(Scanner userInput){
-      String x = "";  
+   public void setUserInput(Scanner userInput){
+      this.userInput = userInput;
+   }
+
+   public void gatherInfo(){
       while(!isInitialized){
          PlayerMenu menu = new PlayerMenu();
          menu.setMenuHeader("Is Player " + this.playerNumber + " a computer? (Y/N)");
@@ -106,5 +111,71 @@ public class Player {
    public List<String> shipList(){
       return ships.stream().map(s -> s.getShipType().toString()).collect(Collectors.toList());
    }
+
+   public void selectShips(){
+		int selected;
+		boolean existSelected = false;
+		
+		while(Ship.ShipType.getList().size() != shipList().size() && !existSelected){
+			System.out.println("Player " + getPlayerNumber() + " choose your ships:");
+			List<String> diff = Ship.ShipType.getList();
+			diff.removeAll(shipList());
+			ShipMenu menu = new ShipMenu(userInput, diff, "Exit");
+			selected = menu.getSelection();
+			if(selected > 0 && selected <= diff.size()){
+				Ship ship = buildShip(this, diff.toArray()[selected - 1].toString());
+				addShip(ship);
+				getPieceBoard().drawBoard();
+			} else {
+				existSelected = menu.isExitSelected();
+			}						
+		}		
+	}
+
+   private static Ship initShip(String shipToBuild){
+      Ship newShip;
+      switch(shipToBuild){
+			case "BATTLESHIP":
+				newShip = new Battleship();
+				break;
+			case "CARRIER":
+				newShip = new Carrier();
+				break;
+			case "CRUISER":
+				newShip = new Cruiser();
+				break;
+			case "DESTROYER":
+				newShip = new Destroyer();
+				break;
+			case "SUBMARINE":
+				newShip = new Submarine();
+				break;
+			default:
+				newShip = new Ship();
+		}
+      return newShip;
+   }
+
+   public Ship buildShip(Player player, String shipToBuild){
+		Ship newShip = initShip(shipToBuild);
+		CoordinateInput input = new CoordinateInput(userInput);
+		
+		while(!input.isComplete()){			
+			input.getCoordinates(gridSize, newShip.getShipLength());
+			if(newShip.getShipLength() != (input.getLength())){				
+				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
+				input.reset();
+			} else {
+				newShip.setStartCoordinate(input.getPair().getStart());
+				newShip.setEndCoordinate(input.getPair().getEnd());
+				newShip.setCoordinateList(input.getCoordinateList());
+				if(!player.getPieceBoard().canPlaceShip(newShip)){
+					System.out.println("Location selected conflicts with another ship placement, please select a new location");
+					input.reset();
+				}
+			}
+		}
+		return newShip;
+	}
 
 }

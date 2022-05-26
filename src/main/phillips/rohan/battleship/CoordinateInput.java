@@ -64,7 +64,7 @@ public class CoordinateInput{
       return list;
    }
 
-   public void getCoordinates(Scanner userInput, int gridSize, int shipLength){      
+   public void getCoordinates(int gridSize, int shipLength){      
       List<Pair> list;
       Menu menu;
 

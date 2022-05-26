@@ -3,6 +3,8 @@ package main.phillips.rohan.battleship.ships;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import main.phillips.rohan.battleship.CoordinateInput;
+import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.board.BoardPosition;
 
 public class Ship {
@@ -11,6 +13,8 @@ public class Ship {
    private String startCoordinate;
    private String endCoordinate;
    private List<String> coordinateList;
+   private static Scanner userInput;
+   private static int gridSize;
 
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
@@ -34,7 +38,7 @@ public class Ship {
       this.shipType = Ship.ShipType.NOTSET;
       this.startCoordinate = "";
       this.endCoordinate = "";
-   }
+   }   
 
    public void setShipType(ShipType shiptype){
       this.shipType = shiptype;

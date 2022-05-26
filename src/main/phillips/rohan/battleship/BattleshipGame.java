@@ -2,12 +2,8 @@ package main.phillips.rohan.battleship;
 
 import java.util.*;
 
-import main.phillips.rohan.battleship.ships.Battleship;
-import main.phillips.rohan.battleship.ships.Carrier;
-import main.phillips.rohan.battleship.ships.Cruiser;
-import main.phillips.rohan.battleship.ships.Destroyer;
+
 import main.phillips.rohan.battleship.ships.Ship;
-import main.phillips.rohan.battleship.ships.Submarine;
 import main.phillips.rohan.battleship.menu.*;
 
 public class BattleshipGame {
@@ -31,17 +27,17 @@ public class BattleshipGame {
 					break;
 				case 2:
 					game.player1.setIsInitialized(false);
-					game.player1.gatherInfo(game.userInput);
+					game.player1.gatherInfo();
 					break;
 				case 3:
 					game.player2.setIsInitialized(false);
-					game.player2.gatherInfo(game.userInput);
+					game.player2.gatherInfo();
 					break;
 				case 4:
-					game.selectShips(game.player1);
+					game.player1.selectShips();
 					break;
 				case 5:
-					game.selectShips(game.player2);
+					game.player2.selectShips();;
 					break;
 				case 6:
 					if(game.initialized && game.canPlay()){
@@ -96,7 +92,9 @@ public class BattleshipGame {
 			setInitialized(false);
 		}
 		player1 = new Player(gridsize, 1, false);		
+		player1.setUserInput(userInput);
 		player2 = new Player(gridsize, 2, false);
+		player2.setUserInput(userInput);
 
 		setInProgress(true);
 	}
@@ -106,67 +104,7 @@ public class BattleshipGame {
 		boolean player1Ready = Ship.ShipType.getList().size() == player1.shipList().size();
 		if(!player1Ready) messages.add("Player 1 has not selected all ships");
 		return messages.isEmpty();
-	}
-
-	public void selectShips(Player player){
-		int selected;
-		boolean existSelected = false;
-		
-		while(Ship.ShipType.getList().size() != player.shipList().size() && !existSelected){
-			System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
-			List<String> diff = Ship.ShipType.getList();
-			diff.removeAll(player.shipList());
-			Menu menu = new ShipMenu(userInput, diff, "Exit");
-			selected = menu.getSelection();
-			if(selected > 0 && selected <= diff.size()){
-				Ship ship = buildShip(player, diff.toArray()[selected - 1].toString());
-				player.addShip(ship);
-				player.getPieceBoard().drawBoard();
-			} else {
-				existSelected = menu.isExitSelected();
-			}						
-		}		
-	}
-
-	public Ship buildShip(Player player, String ship){
-		Ship newShip;
-		CoordinateInput input = new CoordinateInput(userInput);
-		switch(ship){
-			case "BATTLESHIP":
-				newShip = new Battleship();
-				break;
-			case "CARRIER":
-				newShip = new Carrier();
-				break;
-			case "CRUISER":
-				newShip = new Cruiser();
-				break;
-			case "DESTROYER":
-				newShip = new Destroyer();
-				break;
-			case "SUBMARINE":
-				newShip = new Submarine();
-				break;
-			default:
-				newShip = new Ship();
-		}
-		while(!input.isComplete()){			
-			input.getCoordinates(userInput, gridSize, newShip.getShipLength());
-			if(newShip.getShipLength() != (input.getLength())){				
-				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
-				input.reset();
-			} else {
-				newShip.setStartCoordinate(input.getPair().getStart());
-				newShip.setEndCoordinate(input.getPair().getEnd());
-				newShip.setCoordinateList(input.getCoordinateList());
-				if(!player.getPieceBoard().canPlaceShip(newShip)){
-					System.out.println("Location selected conflicts with another ship placement, please select a new location");
-					input.reset();
-				}
-			}
-		}
-		return newShip;
-	}
+	}		
 
 	public boolean getInitialized(){
 		return initialized;

@@ -2,11 +2,9 @@ package test.phillips.rohan.battleship.menu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.*;
 import java.io.*;
 
 import main.phillips.rohan.battleship.menu.Menu;
