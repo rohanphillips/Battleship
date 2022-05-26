@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import main.phillips.rohan.battleship.CoordinateInput;
-import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.board.BoardPosition;
 
 public class Ship {
@@ -15,6 +14,7 @@ public class Ship {
    private List<String> coordinateList;
    private static Scanner userInput;
    private static int gridSize;
+   private CoordinateInput coordinates;
 
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
@@ -82,6 +82,10 @@ public class Ship {
 
    public List<String> getCoordinateList(){
       return coordinateList;
+   }
+
+   public void setCoordinates(CoordinateInput input){
+      coordinates = input;
    }
 
 }

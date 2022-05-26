@@ -158,21 +158,20 @@ public class Player {
 
    public Ship buildShip(Player player, String shipToBuild){
 		Ship newShip = initShip(shipToBuild);
-		CoordinateInput input = new CoordinateInput(userInput);
+		CoordinateInput coordinates = new CoordinateInput(userInput);
 		
-		while(!input.isComplete()){			
-			input.getCoordinates(gridSize, newShip.getShipLength());
-			if(newShip.getShipLength() != (input.getLength())){				
-				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + input.getLength());
-				input.reset();
-			} else {
-				newShip.setStartCoordinate(input.getPair().getStart());
-				newShip.setEndCoordinate(input.getPair().getEnd());
-				newShip.setCoordinateList(input.getCoordinateList());
+		while(!coordinates.isComplete()){			
+			coordinates.getCoordinates(gridSize, newShip.getShipLength());
+			if(newShip.getShipLength() != (coordinates.getLength())){				
+				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + coordinates.getLength());
+				coordinates.reset();
+			} else {            
 				if(!player.getPieceBoard().canPlaceShip(newShip)){
 					System.out.println("Location selected conflicts with another ship placement, please select a new location");
-					input.reset();
-				}
+					coordinates.reset();
+				} else {
+               newShip.setCoordinates(coordinates);
+            }
 			}
 		}
 		return newShip;
