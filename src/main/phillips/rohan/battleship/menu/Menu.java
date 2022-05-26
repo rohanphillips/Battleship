@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Menu {
 
-   private Scanner userInput;
+   public Scanner userInput;
    String menuHeader;
-   private List<String> menuItems;
-   private boolean isExitSelected;
+   public List<String> menuItems;
+   public boolean isExitSelected;
    public static void main(String[] args) {
       Menu menu = new Menu();
       menu.addMenuItem("Test");

@@ -116,7 +116,7 @@ public class BattleshipGame {
 			System.out.println("Player " + player.getPlayerNumber() + " choose your ships:");
 			List<String> diff = Ship.ShipType.getList();
 			diff.removeAll(player.shipList());
-			Menu menu = new Menu(userInput, diff, "Exit");
+			Menu menu = new ShipMenu(userInput, diff, "Exit");
 			selected = menu.getSelection();
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(player, diff.toArray()[selected - 1].toString());
@@ -124,15 +124,13 @@ public class BattleshipGame {
 				player.getPieceBoard().drawBoard();
 			} else {
 				existSelected = menu.isExitSelected();
-			}
-						
-		}
-		
+			}						
+		}		
 	}
 
 	public Ship buildShip(Player player, String ship){
 		Ship newShip;
-		CoordinateInput input = new CoordinateInput();
+		CoordinateInput input = new CoordinateInput(userInput);
 		switch(ship){
 			case "BATTLESHIP":
 				newShip = new Battleship();

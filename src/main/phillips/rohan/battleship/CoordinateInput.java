@@ -76,6 +76,9 @@ public class CoordinateInput{
             int selection = menu.getSelection();
             if(selection <= list.size()){
                 pair = list.get(selection -1);                
+            } else {
+               pair = new Pair();
+               isComplete = true;
             }
          } else if(Coordinates.isValidPair(pair.getStart(), gridSize) && Coordinates.isValidPair(pair.getEnd(), gridSize)){
             if(!Coordinates.isValidOrientation(pair.getStart(), pair.getEnd(), gridSize).getIsValid()){
