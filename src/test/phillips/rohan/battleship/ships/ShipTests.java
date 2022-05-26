@@ -112,11 +112,11 @@ public class ShipTests {
    @DisplayName("Ship List available")
    public void getShipList(){
       List<String> ships = new ArrayList<>();
-      ships.add("BATTLESHIP");
-      ships.add("CARRIER");      
-      ships.add("CRUISER");
-      ships.add("DESTROYER");
-      ships.add("SUBMARINE");
+      ships.add("BATTLESHIP (Length: 4)");
+      ships.add("CARRIER (Length: 5)");      
+      ships.add("CRUISER (Length: 3)");
+      ships.add("DESTROYER (Length: 2)");
+      ships.add("SUBMARINE (Length: 3)");
       
       assertEquals(ships, Ship.ShipType.getList());
    }

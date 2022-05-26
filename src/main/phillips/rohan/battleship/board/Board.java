@@ -10,6 +10,7 @@ import main.phillips.rohan.battleship.ships.Ship;
 public class Board {
    private int gridSize;
    private BoardPosition[][] positions;
+   private Random rand = new Random();
 
    public static void main(String[] args) {
       Board board = new Board(10);
@@ -143,8 +144,7 @@ public class Board {
       });
    }
 
-   public String getRandomCoordinate(){
-      Random rand = new Random();
+   public String getRandomCoordinate(){      
       int row = rand.nextInt(10);
       int col = rand.nextInt(10);
       return Column.get(col) + row;

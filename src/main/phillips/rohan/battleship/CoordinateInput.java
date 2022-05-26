@@ -11,8 +11,15 @@ public class CoordinateInput{
    private boolean isComplete;
    private Pair pair;
    private int length;
+   private Scanner userInput;
 
    public CoordinateInput(){
+      this.isComplete = false;
+      pair = new Pair();
+   }
+
+   public CoordinateInput(Scanner userInput){
+      this.userInput = userInput;
       this.isComplete = false;
       pair = new Pair();
    }
@@ -29,7 +36,7 @@ public class CoordinateInput{
     * @param int shipSize
     * @return
     */
-   public List<Pair> getCoordinatesFromSingle(Scanner userInput, int gridSize, int shipLength){
+   public List<Pair> getCoordinatesFromSingle(int gridSize, int shipLength){
       List<Pair> list = new ArrayList<>();
       int row1;
       int row2;
@@ -64,7 +71,7 @@ public class CoordinateInput{
       while(!isComplete){
          if(!Coordinates.isValidPair(pair.getStart(), gridSize)){
             System.out.println("Enter a valid starting coordinate:");
-            list = getCoordinatesFromSingle(userInput, gridSize, shipLength);
+            list = getCoordinatesFromSingle(gridSize, shipLength);
             menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
             int selection = menu.getSelection();
             if(selection <= list.size()){

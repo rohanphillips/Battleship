@@ -145,18 +145,19 @@ public class CoordinatesTests {
    @DisplayName("Test getCoordinateFromSingle Valid")
    public void testGetCoordinateFromSingleValid(){
       String  loc = "A1";
-      CoordinateInput c = new CoordinateInput();
+      
       InputStream stdin = System.in;
       ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
       List<Pair> list = new ArrayList<>();      
 
       System.setIn(stream);
       Scanner scanner = new Scanner(System.in);
+      CoordinateInput c = new CoordinateInput(scanner);
       
       list.add(new Pair("A1", "A4"));
       list.add(new Pair("A1", "D1"));
 
-      List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+      List<Pair> result = c.getCoordinatesFromSingle(10, 4);
 
       assertListEquals(this::assertPairEqual, list, result);
       scanner.close();
@@ -172,17 +173,18 @@ public class CoordinatesTests {
    @DisplayName("Test getCoordinateFromSingle InValid Vertical")
    public void testGetCoordinateFromSingleInvalidV(){
       String  loc = "A8";
-      CoordinateInput c = new CoordinateInput();
+      
       InputStream stdin = System.in;
       ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
       List<Pair> list = new ArrayList<>();      
 
       System.setIn(stream);
       Scanner scanner = new Scanner(System.in);
+      CoordinateInput c = new CoordinateInput(scanner);
       
       list.add(new Pair("A8", "D8"));
 
-      List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+      List<Pair> result = c.getCoordinatesFromSingle(10, 4);
 
       assertListEquals(this::assertPairEqual, list, result);
       scanner.close();
@@ -197,17 +199,18 @@ public class CoordinatesTests {
     @DisplayName("Test getCoordinateFromSingle InValid Horizontal")
     public void testGetCoordinateFromSingleInvalidH(){
        String  loc = "H3";
-       CoordinateInput c = new CoordinateInput();
+       
        InputStream stdin = System.in;
        ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
        List<Pair> list = new ArrayList<>();      
  
        System.setIn(stream);
        Scanner scanner = new Scanner(System.in);
+       CoordinateInput c = new CoordinateInput(scanner);
        
        list.add(new Pair("H3", "H6"));
  
-       List<Pair> result = c.getCoordinatesFromSingle(scanner, 10, 4);
+       List<Pair> result = c.getCoordinatesFromSingle(10, 4);
  
        assertListEquals(this::assertPairEqual, list, result);
        scanner.close();
