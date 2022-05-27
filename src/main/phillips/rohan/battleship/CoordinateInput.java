@@ -83,15 +83,16 @@ public class CoordinateInput{
          if(!Coordinates.isValidPair(pair.getStart(), gridSize)){
             if(!ship.getShipPlayer().getIsComputer()){
                System.out.println("Enter a valid starting coordinate:");
-            }            
+            }  
+            selection = -1;          
             list = getCoordinatesFromSingle(gridSize, ship);
             if(!ship.getShipPlayer().getIsComputer()){
                menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
                selection = menu.getSelection();
-            } else {
+            } else if(!list.isEmpty()){
                selection = rand.nextInt(list.size()) + 1;
             }
-            if(selection <= list.size()){
+            if(selection >= 0 && selection <= list.size()){
                 pair = list.get(selection -1);                
             } else {
                pair = new Pair();

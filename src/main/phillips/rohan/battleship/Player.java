@@ -133,9 +133,9 @@ public class Player {
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(this, diff.toArray()[selected - 1].toString());
 				addShip(ship);
-            if(!isComputer){
+            //if(!isComputer){
                getPieceBoard().drawBoard();
-            }				
+            //}				
 			} else if(!isComputer) {
 				existSelected = menu.isExitSelected();
 			}						
@@ -181,7 +181,9 @@ public class Player {
 				coordinates.reset();
 			} else {            
 				if(!player.getPieceBoard().canPlaceShip(newShip)){
-					System.out.println("Location selected conflicts with another ship placement, please select a new location");
+					if(!newShip.getShipPlayer().isComputer){
+                  System.out.println("Location selected conflicts with another ship placement, please select a new location");
+               }               
 					coordinates.reset();
 				} else {
                newShip.setCoordinates(coordinates);

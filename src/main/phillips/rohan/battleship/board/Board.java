@@ -9,8 +9,8 @@ import main.phillips.rohan.battleship.ships.Ship;
 
 public class Board {
    private int gridSize;
+   //Column Row
    private BoardPosition[][] positions;
-   private Random rand = new Random();
 
    public static void main(String[] args) {
       Board board = new Board(10);
@@ -124,12 +124,14 @@ public class Board {
       int col2 = Column.valueOf(info.getColumn(2)).getColumnNumber();
       int row1 = info.getRow(1);
       int row2 = info.getRow(2);
-      for(var i = col1; i <= col2; i++){
-         for(var j = row1; j <= row2; j++){
-            BoardPosition position = positions[i][j];
-            if(!position.getIsEmpty()){
-               return false;
-            }
+      for(var col = col1 - 1; col <= col2 + 1; col++){
+         for(var row = row1 - 1; row <= row2 + 1; row++){
+            if(Coordinates.isValidPair(Coordinates.getCoordinatePair(row, col), gridSize)){
+               BoardPosition position = positions[col][row];
+               if(!position.getIsEmpty()){
+                  return false;
+               }
+            }            
          }
       }
       return true;

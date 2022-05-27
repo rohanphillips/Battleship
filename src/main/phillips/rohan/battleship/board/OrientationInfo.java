@@ -15,8 +15,8 @@ public class OrientationInfo{
      this.row2 = row2;
    }
 
-   public String getColumn(int num){
-      switch(num){
+   public String getColumn(int col){
+      switch(col){
          case 2:
             return col2;
          default:
@@ -24,8 +24,8 @@ public class OrientationInfo{
       }
    }
 
-   public int getRow(int num){
-      switch(num){
+   public int getRow(int row){
+      switch(row){
          case 2:
             return row2;
          default:
