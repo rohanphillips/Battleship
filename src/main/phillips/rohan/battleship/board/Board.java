@@ -1,7 +1,5 @@
 package main.phillips.rohan.battleship.board;
 
-import java.util.Random;
-
 import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.board.Coordinates.Column;
 import main.phillips.rohan.battleship.ships.Battleship;

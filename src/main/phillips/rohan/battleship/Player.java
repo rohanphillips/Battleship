@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import main.phillips.rohan.battleship.board.Board;
+import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.menu.PlayerMenu;
 import main.phillips.rohan.battleship.menu.ShipMenu;
 import main.phillips.rohan.battleship.ships.*;
@@ -86,6 +87,22 @@ public class Player {
       ships.add(ship);
    }
 
+   public boolean takeGuess(){
+      String guess;
+      //print the grid
+      guessBoard.drawBoard();      
+      System.out.println("Player " + playerNumber + ": Enter your location guess");
+      guess = userInput.nextLine();
+      if(Coordinates.isValidPair(guess, gridSize)){
+         guessBoard.getPosition(guess).setIsGuessed(true);
+         return true;
+      }
+      //get input
+      //do stuff
+      //return true if ok
+      return false;
+   }
+
    
 
    public Ship getShip(Ship.ShipType type){
@@ -133,9 +150,9 @@ public class Player {
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(this, diff.toArray()[selected - 1].toString());
 				addShip(ship);
-            //if(!isComputer){
+            if(!isComputer){
                getPieceBoard().drawBoard();
-            //}				
+            }				
 			} else if(!isComputer) {
 				existSelected = menu.isExitSelected();
 			}						

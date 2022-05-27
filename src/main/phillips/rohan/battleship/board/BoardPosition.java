@@ -40,6 +40,7 @@ public class BoardPosition {
 
    public void setIsGuessed(boolean setIsGuessed){
       this.isGuessed = setIsGuessed;
+      this.isEmpty = !setIsGuessed;
    }
 
    public boolean getIsGuessed(){
