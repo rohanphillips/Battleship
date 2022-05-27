@@ -4,17 +4,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import main.phillips.rohan.battleship.CoordinateInput;
+import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.board.BoardPosition;
 
 public class Ship {
    private ShipType shipType;
    private BoardPosition[] positions;
-   private String startCoordinate;
-   private String endCoordinate;
    private List<String> coordinateList;
    private static Scanner userInput;
    private static int gridSize;
    private CoordinateInput coordinates;
+   private Player player;
 
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
@@ -36,9 +36,12 @@ public class Ship {
 
    public Ship(){
       this.shipType = Ship.ShipType.NOTSET;
-      this.startCoordinate = "";
-      this.endCoordinate = "";
-   }   
+      coordinates = new CoordinateInput();
+   } 
+   
+   public void setPlayer(Player player){
+      this.player = player;
+   }
 
    public void setShipType(ShipType shiptype){
       this.shipType = shiptype;
@@ -61,19 +64,19 @@ public class Ship {
    }
 
    public void setStartCoordinate(String start){
-      startCoordinate = start;
+      coordinates.getPair().setStart(start);
    }
 
    public String getStartCoordinate(){
-      return startCoordinate;
+      return coordinates.getPair().getStart();
    }
 
    public void setEndCoordinate(String end){
-      endCoordinate = end;
+      coordinates.getPair().setEnd(end);
    }
 
    public String getEndCoordinate(){
-      return endCoordinate;
+      return coordinates.getPair().getEnd();
    }
 
    public void setCoordinateList(List<String> list){
@@ -86,6 +89,14 @@ public class Ship {
 
    public void setCoordinates(CoordinateInput input){
       coordinates = input;
+   }
+
+   public CoordinateInput getShipCoordinates(){
+      return coordinates;
+   }
+
+   public Player getShipPlayer(){
+      return player;
    }
 
 }

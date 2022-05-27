@@ -16,8 +16,6 @@ public class Board {
       Board board = new Board(10);
       Battleship ship = new Battleship();
       CoordinateInput input = new CoordinateInput("A1", "a4");
-      ship.setStartCoordinate(input.getPair().getStart());
-      ship.setEndCoordinate(input.getPair().getEnd());
       ship.setCoordinateList(input.getCoordinateList());
       board.updateBoardShipCoordinates(ship);
       board.drawBoard();

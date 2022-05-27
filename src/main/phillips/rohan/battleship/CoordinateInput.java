@@ -5,6 +5,7 @@ import java.util.*;
 import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.board.Coordinates.Column;
 import main.phillips.rohan.battleship.menu.Menu;
+import main.phillips.rohan.battleship.ships.Ship;
 import test.phillips.rohan.battleship.board.Pair;
 
 public class CoordinateInput{
@@ -12,21 +13,25 @@ public class CoordinateInput{
    private Pair pair;
    private int length;
    private Scanner userInput;
+   private Random rand;
 
    public CoordinateInput(){
       this.isComplete = false;
       pair = new Pair();
+      rand = new Random();
    }
 
    public CoordinateInput(Scanner userInput){
       this.userInput = userInput;
       this.isComplete = false;
       pair = new Pair();
+      rand = new Random();
    }
 
    public CoordinateInput(String start, String end){
       pair = new Pair(start, end);
       this.isComplete = false;
+      rand = new Random();
    }
 
    /**
@@ -36,7 +41,7 @@ public class CoordinateInput{
     * @param int shipSize
     * @return
     */
-   public List<Pair> getCoordinatesFromSingle(int gridSize, int shipLength){
+   public List<Pair> getCoordinatesFromSingle(int gridSize, Ship ship){
       List<Pair> list = new ArrayList<>();
       int row1;
       int row2;
@@ -45,12 +50,17 @@ public class CoordinateInput{
       String temp;
 
       while(!Coordinates.isValidPair(pair.getStart(), gridSize)){
-         pair.setStart(userInput.nextLine());
+         if(!ship.getShipPlayer().getIsComputer()){
+            pair.setStart(userInput.nextLine());
+         } else {
+            pair.setStart(Coordinates.getRandomCoordinate(gridSize));
+         }
+         
          if(Coordinates.isValidPair(pair.getStart(), gridSize)){
             row1 = Coordinates.getRow(pair.getStart());
             col1 = Column.valueOf(Coordinates.getColumn(pair.getStart())).getColumnNumber();
-            row2 = row1 + shipLength;
-            col2 = col1 + shipLength - 1;
+            row2 = row1 + ship.getShipLength();
+            col2 = col1 + ship.getShipLength() - 1;
             temp = Column.get(col1) + row2;
             if(Coordinates.isValidPair(temp, gridSize) && Coordinates.isValidOrientation(pair.getStart(), temp, gridSize).getIsValid()){               
                list.add(new Pair(pair.getStart(), temp));
@@ -64,16 +74,23 @@ public class CoordinateInput{
       return list;
    }
 
-   public void getCoordinates(int gridSize, int shipLength){      
+   public void getCoordinates(int gridSize, Ship ship){      
+      int selection;
       List<Pair> list;
       Menu menu;
 
       while(!isComplete){
          if(!Coordinates.isValidPair(pair.getStart(), gridSize)){
-            System.out.println("Enter a valid starting coordinate:");
-            list = getCoordinatesFromSingle(gridSize, shipLength);
-            menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
-            int selection = menu.getSelection();
+            if(!ship.getShipPlayer().getIsComputer()){
+               System.out.println("Enter a valid starting coordinate:");
+            }            
+            list = getCoordinatesFromSingle(gridSize, ship);
+            if(!ship.getShipPlayer().getIsComputer()){
+               menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
+               selection = menu.getSelection();
+            } else {
+               selection = rand.nextInt(list.size()) + 1;
+            }
             if(selection <= list.size()){
                 pair = list.get(selection -1);                
             } else {
@@ -87,6 +104,7 @@ public class CoordinateInput{
             } else {
                isComplete = true;
                length = Coordinates.getOrientationLength(this.pair);
+               ship.setCoordinateList(getCoordinateList());
             }
          }
       }

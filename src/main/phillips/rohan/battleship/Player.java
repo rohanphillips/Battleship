@@ -17,6 +17,7 @@ public class Player {
    private List<Ship> ships;
    private int gridSize;
    private static Scanner userInput;
+   private static Random rand;
 
    public Player(int gridSize, int playerNumber, boolean isComputer){
       this.pieceBoard = new Board(gridSize);
@@ -25,6 +26,7 @@ public class Player {
       this.playerNumber = playerNumber;
       this.isComputer = isComputer;
       this.gridSize = gridSize;
+      rand = new Random();
    }
 
    public void setUserInput(Scanner userInput){
@@ -117,19 +119,30 @@ public class Player {
 		boolean existSelected = false;
 		
 		while(Ship.ShipType.getList().size() != shipList().size() && !existSelected){
-			System.out.println("Player " + getPlayerNumber() + " choose your ships:");
-			List<String> diff = Ship.ShipType.getList();
+         List<String> diff = Ship.ShipType.getList();
+         ShipMenu menu = new ShipMenu();
 			diff.removeAll(shipList());
-			ShipMenu menu = new ShipMenu(userInput, diff, "Exit");
-			selected = menu.getSelection();
+         if(!isComputer){
+            System.out.println("Player " + getPlayerNumber() + " choose your ships:");
+            menu = new ShipMenu(userInput, diff, "Exit");
+			   selected = menu.getSelection();
+         } else{
+            selected = rand.nextInt(diff.size() + 1) + 1;
+         }					
+			
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(this, diff.toArray()[selected - 1].toString());
 				addShip(ship);
-				getPieceBoard().drawBoard();
-			} else {
+            if(!isComputer){
+               getPieceBoard().drawBoard();
+            }				
+			} else if(!isComputer) {
 				existSelected = menu.isExitSelected();
 			}						
-		}		
+		}	
+      if(isComputer){
+         getPieceBoard().drawBoard();
+      }	
 	}
 
    private static Ship initShip(String shipToBuild){
@@ -158,10 +171,11 @@ public class Player {
 
    public Ship buildShip(Player player, String shipToBuild){
 		Ship newShip = initShip(shipToBuild);
-		CoordinateInput coordinates = new CoordinateInput(userInput);
+      newShip.setPlayer(this);
+		CoordinateInput coordinates = newShip.getShipCoordinates();
 		
 		while(!coordinates.isComplete()){			
-			coordinates.getCoordinates(gridSize, newShip.getShipLength());
+			coordinates.getCoordinates(gridSize, newShip);
 			if(newShip.getShipLength() != (coordinates.getLength())){				
 				System.out.println("Ship Length is " + newShip.getShipLength() + ", Length of coordinates entered is " + coordinates.getLength());
 				coordinates.reset();

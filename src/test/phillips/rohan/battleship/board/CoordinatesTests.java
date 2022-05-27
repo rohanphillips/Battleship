@@ -15,6 +15,8 @@ import org.junit.jupiter.api.DisplayName;
 import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.board.Coordinates;
 import main.phillips.rohan.battleship.board.OrientationInfo;
+import main.phillips.rohan.battleship.ships.Ship;
+import main.phillips.rohan.battleship.ships.Ship.ShipType;
 
 public class CoordinatesTests {
 
@@ -145,6 +147,8 @@ public class CoordinatesTests {
    @DisplayName("Test getCoordinateFromSingle Valid")
    public void testGetCoordinateFromSingleValid(){
       String  loc = "A1";
+      Ship ship = new Ship();
+      ship.setShipType(ShipType.BATTLESHIP);
       
       InputStream stdin = System.in;
       ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
@@ -157,7 +161,7 @@ public class CoordinatesTests {
       list.add(new Pair("A1", "A4"));
       list.add(new Pair("A1", "D1"));
 
-      List<Pair> result = c.getCoordinatesFromSingle(10, 4);
+      List<Pair> result = c.getCoordinatesFromSingle(10, ship);
 
       assertListEquals(this::assertPairEqual, list, result);
       scanner.close();
@@ -173,6 +177,8 @@ public class CoordinatesTests {
    @DisplayName("Test getCoordinateFromSingle InValid Vertical")
    public void testGetCoordinateFromSingleInvalidV(){
       String  loc = "A8";
+      Ship ship = new Ship();
+      ship.setShipType(ShipType.BATTLESHIP);
       
       InputStream stdin = System.in;
       ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
@@ -184,7 +190,7 @@ public class CoordinatesTests {
       
       list.add(new Pair("A8", "D8"));
 
-      List<Pair> result = c.getCoordinatesFromSingle(10, 4);
+      List<Pair> result = c.getCoordinatesFromSingle(10, ship);
 
       assertListEquals(this::assertPairEqual, list, result);
       scanner.close();
@@ -199,6 +205,8 @@ public class CoordinatesTests {
     @DisplayName("Test getCoordinateFromSingle InValid Horizontal")
     public void testGetCoordinateFromSingleInvalidH(){
        String  loc = "H3";
+       Ship ship = new Ship();
+         ship.setShipType(ShipType.BATTLESHIP);
        
        InputStream stdin = System.in;
        ByteArrayInputStream stream = new ByteArrayInputStream(loc.getBytes());
@@ -210,7 +218,7 @@ public class CoordinatesTests {
        
        list.add(new Pair("H3", "H6"));
  
-       List<Pair> result = c.getCoordinatesFromSingle(10, 4);
+       List<Pair> result = c.getCoordinatesFromSingle(10, ship);
  
        assertListEquals(this::assertPairEqual, list, result);
        scanner.close();

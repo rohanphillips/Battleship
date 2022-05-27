@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-import main.phillips.rohan.battleship.ships.Ship;
 import main.phillips.rohan.battleship.ships.Ship.ShipType;
 
 public class ShipMenu extends Menu {
+
+   public ShipMenu(){
+      super();
+   }
    
    public ShipMenu(Scanner userInput, List<String> list, String exitString){
       super(userInput, list, exitString);
