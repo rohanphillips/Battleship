@@ -62,12 +62,12 @@ public class Player {
       return this.pieceBoard;
    }
 
-   public Board getGuessboard(){
+   public Board getGuessBoard(){
       return this.guessBoard;
    }
 
-   public void setIsComputer(boolean iscomputer){
-      isComputer = iscomputer;
+   public void setIsComputer(boolean isComputer){
+      this.isComputer = isComputer;
    }
 
    public boolean getIsComputer(){
@@ -87,23 +87,39 @@ public class Player {
       ships.add(ship);
    }
 
-   public boolean takeGuess(){
+   public boolean takeGuess(Player otherPlayer){
       String guess;
+      Ship ship;
       //print the grid
+      pieceBoard.drawBoard();
       guessBoard.drawBoard();      
       System.out.println("Player " + playerNumber + ": Enter your location guess");
       guess = userInput.nextLine();
       if(Coordinates.isValidPair(guess, gridSize)){
-         guessBoard.getPosition(guess).setIsGuessed(true);
+         if(otherPlayer.getPieceBoard().isPositionEmpty(guess)){
+            guessBoard.getPosition(guess).setIsGuessed(true);
+            System.out.println("Missed!");
+         } else {
+            //is a hit
+            ship = otherPlayer.getPieceBoard().getPosition(guess).getShip();
+            System.out.println("HIT! - " + ship.getShipAbbreviation());
+            guessBoard.setPositionShip(guess, ship);
+            otherPlayer.getPieceBoard().getPosition(guess).setIsHit(true);
+         }
+         
          return true;
       }
-      //get input
-      //do stuff
-      //return true if ok
       return false;
    }
 
-   
+   public boolean isAllShipsSunk(){
+      for(var i = 0; i < ships.size(); i++){
+         if(!ships.get(i).isSunk(pieceBoard)){
+            return false;
+         }
+      }
+      return true;
+   }
 
    public Ship getShip(Ship.ShipType type){
       List<Ship> result = ships.stream().filter(s -> s.getShipType() == type).collect(Collectors.toList());
@@ -150,16 +166,10 @@ public class Player {
 			if(selected > 0 && selected <= diff.size()){
 				Ship ship = buildShip(this, diff.toArray()[selected - 1].toString());
 				addShip(ship);
-            if(!isComputer){
-               getPieceBoard().drawBoard();
-            }				
 			} else if(!isComputer) {
 				existSelected = menu.isExitSelected();
 			}						
-		}	
-      if(isComputer){
-         getPieceBoard().drawBoard();
-      }	
+		}
 	}
 
    private static Ship initShip(String shipToBuild){

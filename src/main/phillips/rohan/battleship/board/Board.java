@@ -78,7 +78,7 @@ public class Board {
       } else if(position.getIsGuessed()){
          return addPadding("G");
       }
-      return addPadding(position.getShip().getShipType().name());
+      return addPadding(position.getShip().getShipAbbreviation());
    }
 
    
@@ -94,6 +94,7 @@ public class Board {
 
    public void setPositionShip(String coordinate, Ship ship){
       getPosition(coordinate).setShip(ship);
+      setPositionEmpty(coordinate, false);
    }
 
    public boolean isPositionEmpty(String coordinate){      

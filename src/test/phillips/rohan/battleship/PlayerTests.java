@@ -24,7 +24,7 @@ public class PlayerTests {
    public void testCreatePlayer(){
 
       assertEquals(setupPlayer(true).getPieceBoard().getClass(), main.phillips.rohan.battleship.board.Board.class);
-      assertEquals(setupPlayer(true).getGuessboard().getClass(), main.phillips.rohan.battleship.board.Board.class);
+      assertEquals(setupPlayer(true).getGuessBoard().getClass(), main.phillips.rohan.battleship.board.Board.class);
    }
 
    @Test

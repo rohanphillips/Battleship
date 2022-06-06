@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 
 import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.Player;
+import main.phillips.rohan.battleship.board.Board;
 import main.phillips.rohan.battleship.board.BoardPosition;
+import main.phillips.rohan.battleship.board.Coordinates;
 
 public class Ship {
    private ShipType shipType;
-   private BoardPosition[] positions;
    private List<String> coordinateList;
    private static Scanner userInput;
    private static int gridSize;
@@ -43,9 +44,8 @@ public class Ship {
       this.player = player;
    }
 
-   public void setShipType(ShipType shiptype){
-      this.shipType = shiptype;
-      this.positions = new BoardPosition[this.shipType.length];
+   public void setShipType(ShipType type){
+      this.shipType = type;
    }
 
    public ShipType getShipType(){
@@ -59,8 +59,8 @@ public class Ship {
       return -1;
    }
 
-   public BoardPosition[] getPositions(){
-      return positions;
+   public String getShipAbbreviation(){
+      return shipType.name().substring(0, 3);
    }
 
    public void setStartCoordinate(String start){
@@ -97,6 +97,15 @@ public class Ship {
 
    public Player getShipPlayer(){
       return player;
+   }
+
+   public boolean isSunk(Board board){
+      for(var i = 0; i < coordinateList.size(); i++){
+         if(!board.getPosition(coordinateList.get(i)).getIsHit()){
+            return false;
+         }
+      }
+      return true;
    }
 
 }

@@ -60,20 +60,31 @@ public class BattleshipGame {
 		// 	}
 		// }
 		game.initGame(10);
-		while(!game.gameWon){
-			while (!game.player1.takeGuess()){
-				System.out.println("P1");
-			}
-			while(!game.player2.takeGuess()){
-				System.out.println("P2");
-			}
-		}
+		game.player1.setIsComputer(true);
+		game.player1.selectShips();
+		game.player2.setIsComputer(true);
+		game.player2.selectShips();
+		game.setInitialized(true);
+
+		
 
 		if(game.getInitialized()){
 			System.out.println("Game Initialized.... Let's play");
-			game.player1.getPieceBoard().drawBoard();
-			while(game.inProgress){
-				game.inProgress = false;
+			while(!game.gameWon){
+				while (!game.player1.takeGuess(game.player2)){
+					System.out.println("P1");
+				}
+				if(game.player2.isAllShipsSunk()){
+					game.setGameWon(true);
+					System.out.println("Player 1 is the Winner!");
+				}
+				while(!game.player2.takeGuess(game.player1) && !game.gameWon){
+					System.out.println("P2");
+				}
+				if(game.player1.isAllShipsSunk()){
+					game.setGameWon(true);
+					System.out.println("Player 2 is the Winner!");
+				}
 			}
 		}
 	}
