@@ -42,6 +42,7 @@ public class Board {
    }
 
    public void drawBoard(){
+      System.out.println();
       for(var row = 0; row < gridSize; row++){
          if(row != 0){            
             System.out.println("   " + "---".repeat(gridSize) + "-".repeat(gridSize - 1));
@@ -53,7 +54,6 @@ public class Board {
                }               
                System.out.print(addPadding(Column.get(col)));
             }
-            System.out.println();
             System.out.println("   ".repeat(gridSize) + " ".repeat(gridSize - 1));
          }
          System.out.print(addPadding(String.valueOf((row + 1))));

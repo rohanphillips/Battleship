@@ -1,5 +1,6 @@
 package main.phillips.rohan.battleship;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -78,6 +79,8 @@ public class BattleshipGame {
 					game.setGameWon(true);
 					System.out.println("Player 1 is the Winner!");
 				}
+				game.pressAnyKey();
+
 				while(!game.player2.takeGuess(game.player1) && !game.gameWon){
 					System.out.println("P2");
 				}
@@ -85,6 +88,7 @@ public class BattleshipGame {
 					game.setGameWon(true);
 					System.out.println("Player 2 is the Winner!");
 				}
+				game.pressAnyKey();
 			}
 		}
 	}
@@ -109,6 +113,11 @@ public class BattleshipGame {
 		
 		gridSize = size;
 		return size;
+	}
+
+	public void pressAnyKey(){
+		System.out.println("Press Any key to continue...");
+		userInput.nextLine();
 	}
 
 	public void initGame(int gridsize){		
