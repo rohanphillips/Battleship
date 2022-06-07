@@ -22,48 +22,48 @@ public class BattleshipGame {
 		menu.setMenuHeader("Main Menu");
 		BattleshipGame game = new BattleshipGame();
 
-		// while(!menu.isExitSelected() && !game.getInitialized()){
-		// 	switch(menu.getSelection()){
-		// 		case 1:
-		// 			game.initGame(game.getUserGridSize());
-		// 			break;
-		// 		case 2:
-		// 			game.player1.setIsInitialized(false);
-		// 			game.player1.gatherInfo();
-		// 			break;
-		// 		case 3:
-		// 			game.player2.setIsInitialized(false);
-		// 			game.player2.gatherInfo();
-		// 			break;
-		// 		case 4:
-		// 			game.player1.selectShips();
-		// 			break;
-		// 		case 5:
-		// 			game.player2.selectShips();;
-		// 			break;
-		// 		case 6:
-		// 			if(game.canPlay()){
-		// 				game.setInitialized(true);
-		// 			} else {
-		// 				System.out.println("Can't play yet, everything not ready yet");
-		// 				game.messages.forEach(m -> System.out.println((game.messages.indexOf(m) + 1) + ": " + m + "\n"));
-		// 			}
-		// 			break;
-		// 		case 7:
-		// 			System.out.println("Bye!  Hope you had a good time");
-		// 			menu.setIsExitSelected(true);
-		// 			break;
-		// 		default:
-		// 			System.out.println("Invalid Menu Selection, please reselect");					
-		// 			break;
-		// 	}
-		// }
-		game.initGame(10);
-		game.player1.setIsComputer(true);
-		game.player1.selectShips();
-		game.player2.setIsComputer(true);
-		game.player2.selectShips();
-		game.setInitialized(true);
+		while(!menu.isExitSelected() && !game.getInitialized()){
+			switch(menu.getSelection()){
+				case 1:
+					game.initGame(game.getUserGridSize());
+					break;
+				case 2:
+					game.player1.setIsInitialized(false);
+					game.player1.gatherInfo();
+					break;
+				case 3:
+					game.player2.setIsInitialized(false);
+					game.player2.gatherInfo();
+					break;
+				case 4:
+					game.player1.selectShips();
+					break;
+				case 5:
+					game.player2.selectShips();;
+					break;
+				case 6:
+					if(game.canPlay()){
+						game.setInitialized(true);
+					} else {
+						System.out.println("Can't play yet, everything not ready yet");
+						game.messages.forEach(m -> System.out.println((game.messages.indexOf(m) + 1) + ": " + m + "\n"));
+					}
+					break;
+				case 7:
+					System.out.println("Bye!  Hope you had a good time");
+					menu.setIsExitSelected(true);
+					break;
+				default:
+					System.out.println("Invalid Menu Selection, please reselect");					
+					break;
+			}
+		}
+		// game.initGame(10);
+		// game.player1.setIsComputer(true);
+		// game.player1.selectShips();
+		// game.player2.setIsComputer(true);
+		// game.player2.selectShips();
+		// game.setInitialized(true);
 
 		
 
