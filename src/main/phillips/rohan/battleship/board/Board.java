@@ -61,7 +61,7 @@ public class Board {
             if(col != 0){
                System.out.print("|");
             }
-            BoardPosition position = positions[row][col];
+            
             System.out.print(getPositionCharacter(Coordinates.getCoordinatePair(row, col)));
          }
          System.out.println();

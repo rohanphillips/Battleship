@@ -6,14 +6,10 @@ import java.util.stream.Collectors;
 import main.phillips.rohan.battleship.CoordinateInput;
 import main.phillips.rohan.battleship.Player;
 import main.phillips.rohan.battleship.board.Board;
-import main.phillips.rohan.battleship.board.BoardPosition;
-import main.phillips.rohan.battleship.board.Coordinates;
 
 public class Ship {
    private ShipType shipType;
    private List<String> coordinateList;
-   private static Scanner userInput;
-   private static int gridSize;
    private CoordinateInput coordinates;
    private Player player;
 

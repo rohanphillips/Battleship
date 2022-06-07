@@ -18,7 +18,7 @@ public class Player {
    private List<Ship> ships;
    private int gridSize;
    private static Scanner userInput;
-   private static Random rand;
+   private static Random rand = new Random();
 
    public Player(int gridSize, int playerNumber, boolean isComputer){
       this.pieceBoard = new Board(gridSize);
@@ -27,7 +27,6 @@ public class Player {
       this.playerNumber = playerNumber;
       this.isComputer = isComputer;
       this.gridSize = gridSize;
-      rand = new Random();
    }
 
    public void setUserInput(Scanner userInput){

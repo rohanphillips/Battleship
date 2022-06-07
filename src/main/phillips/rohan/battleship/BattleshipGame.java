@@ -1,11 +1,9 @@
 package main.phillips.rohan.battleship;
 
-import java.io.IOException;
 import java.util.*;
 
 
 import main.phillips.rohan.battleship.ships.Ship;
-import test.phillips.rohan.battleship.PlayerTests;
 import main.phillips.rohan.battleship.menu.*;
 
 public class BattleshipGame {
@@ -120,13 +118,13 @@ public class BattleshipGame {
 		userInput.nextLine();
 	}
 
-	public void initGame(int gridsize){		
-		if(!isGridSizeValid(gridsize)){
+	public void initGame(int gridSize){		
+		if(!isGridSizeValid(gridSize)){
 			setInitialized(false);
 		}
-		player1 = new Player(gridsize, 1, false);		
+		player1 = new Player(gridSize, 1, false);		
 		player1.setUserInput(userInput);
-		player2 = new Player(gridsize, 2, false);
+		player2 = new Player(gridSize, 2, false);
 		player2.setUserInput(userInput);
 
 		setInProgress(true);
@@ -169,8 +167,8 @@ public class BattleshipGame {
 		inProgress = val;
 	}
 
-	public boolean isGridSizeValid(int gridsize){
-		return gridsize >= 7 && gridsize <= 10;
+	public boolean isGridSizeValid(int gridSize){
+		return gridSize >= 7 && gridSize <= 10;
 	}
 }
 
