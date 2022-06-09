@@ -39,7 +39,7 @@ public class BattleshipGame {
 					game.player1.selectShips();
 					break;
 				case 5:
-					game.player2.selectShips();;
+					game.player2.selectShips();
 					break;
 				case 6:
 					if(game.canPlay()){
@@ -122,10 +122,9 @@ public class BattleshipGame {
 		if(!isGridSizeValid(gridSize)){
 			setInitialized(false);
 		}
-		player1 = new Player(gridSize, 1, false);		
-		player1.setUserInput(userInput);
+		Player.setUserInput(userInput);
+		player1 = new Player(gridSize, 1, false);				
 		player2 = new Player(gridSize, 2, false);
-		player2.setUserInput(userInput);
 
 		setInProgress(true);
 	}

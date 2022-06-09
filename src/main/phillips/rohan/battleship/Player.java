@@ -29,8 +29,8 @@ public class Player {
       this.gridSize = gridSize;
    }
 
-   public void setUserInput(Scanner userInput){
-      this.userInput = userInput;
+   public static void setUserInput(Scanner input){
+      userInput = input;
    }
 
    public void gatherInfo(){
@@ -38,12 +38,10 @@ public class Player {
          PlayerMenu menu = new PlayerMenu();
          menu.setMenuHeader("Is Player " + this.playerNumber + " a computer? (Y/N)");
          menu.setupYesNo();
-         switch(menu.getSelection()){
-            case 2:
-               setIsComputer(true);
-               break;
-            default:
-               setIsComputer(false);
+         if(menu.getSelection() == 2){
+            setIsComputer(true);
+         } else {
+            setIsComputer(false);
          }
          isInitialized = true;
       }
