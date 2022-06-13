@@ -197,7 +197,8 @@ public class Player {
 		Ship newShip = initShip(shipToBuild);
       newShip.setPlayer(this);
 		CoordinateInput coordinates = newShip.getShipCoordinates();
-		
+		coordinates.setUserInput(userInput);
+      
 		while(!coordinates.isComplete()){			
 			coordinates.getCoordinates(gridSize, newShip);
 			if(newShip.getShipLength() != (coordinates.getLength())){				

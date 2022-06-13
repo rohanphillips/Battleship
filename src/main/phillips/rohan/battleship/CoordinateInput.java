@@ -28,6 +28,10 @@ public class CoordinateInput{
       rand = new Random();
    }
 
+   public void setUserInput(Scanner input){
+      userInput = input;
+   }
+
    public CoordinateInput(String start, String end){
       pair = new Pair(start, end);
       this.isComplete = false;

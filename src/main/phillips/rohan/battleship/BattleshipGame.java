@@ -10,7 +10,6 @@ public class BattleshipGame {
 
 	private boolean initialized;
 	private boolean inProgress;
-	private int gridSize;
 	private Scanner userInput;
 	private Player player1;
 	private Player player2;
@@ -44,6 +43,7 @@ public class BattleshipGame {
 				case 6:
 					if(game.canPlay()){
 						game.setInitialized(true);
+						game.play();
 					} else {
 						System.out.println("Can't play yet, everything not ready yet");
 						game.messages.forEach(m -> System.out.println((game.messages.indexOf(m) + 1) + ": " + m + "\n"));
@@ -58,37 +58,8 @@ public class BattleshipGame {
 					break;
 			}
 		}
-		// game.initGame(10);
-		// game.player1.setIsComputer(true);
-		// game.player1.selectShips();
-		// game.player2.setIsComputer(true);
-		// game.player2.selectShips();
-		// game.setInitialized(true);
 
 		
-
-		if(game.getInitialized()){
-			System.out.println("Game Initialized.... Let's play");
-			while(!game.gameWon){
-				while (!game.player1.takeGuess(game.player2)){
-					System.out.println("P1");
-				}
-				if(game.player2.isAllShipsSunk()){
-					game.setGameWon(true);
-					System.out.println("Player 1 is the Winner!");
-				}
-				game.pressAnyKey();
-
-				while(!game.player2.takeGuess(game.player1) && !game.gameWon){
-					System.out.println("P2");
-				}
-				if(game.player1.isAllShipsSunk()){
-					game.setGameWon(true);
-					System.out.println("Player 2 is the Winner!");
-				}
-				game.pressAnyKey();
-			}
-		}
 	}
 
 	public BattleshipGame(){
@@ -96,6 +67,31 @@ public class BattleshipGame {
 		messages = new ArrayList<>();
 		playerTurn = 1;
 		gameWon = false;
+	}
+
+	public void play(){
+		if(getInitialized()){
+			System.out.println("Game Initialized.... Let's play");
+			while(!gameWon){
+				while (!player1.takeGuess(player2)){
+					System.out.println("P1");
+				}
+				if(player2.isAllShipsSunk()){
+					setGameWon(true);
+					System.out.println("Player 1 is the Winner!");
+				}
+				pressAnyKey();
+
+				while(!player2.takeGuess(player1) && !gameWon){
+					System.out.println("P2");
+				}
+				if(player1.isAllShipsSunk()){
+					setGameWon(true);
+					System.out.println("Player 2 is the Winner!");
+				}
+				pressAnyKey();
+			}
+		}
 	}
 
 	public int getUserGridSize(){
@@ -107,9 +103,8 @@ public class BattleshipGame {
 			} catch (NumberFormatException nfe){
 				size = 0;
 			}
-		}  
+		}
 		
-		gridSize = size;
 		return size;
 	}
 
