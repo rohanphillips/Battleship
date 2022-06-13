@@ -22,7 +22,7 @@ public class ShipMenu extends Menu {
       
       while(input < 1 || input > menuItems.size()){
          System.out.println(menuHeader);         
-         IntStream.range(0, menuItems.size()).forEach(i -> System.out.println((i + 1) + ": " + menuItems.get(i) + (i < menuItems.size() - 1 ? " (Length: " + ShipType.valueOf(menuItems.get(i)).length + ")"  : "")));
+         IntStream.range(0, menuItems.size()).forEach(i -> System.out.println((i + 1) + ": " + menuItems.get(i) + (i < menuItems.size() - 1 ? " (Length: " + ShipType.valueOf(menuItems.get(i)).getLength() + ")"  : "")));
          try{
             input = Integer.parseInt(userInput.nextLine());
          }

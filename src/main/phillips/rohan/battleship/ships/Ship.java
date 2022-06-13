@@ -16,7 +16,7 @@ public class Ship {
    public enum ShipType {
       BATTLESHIP(4),CARRIER(5), CRUISER(3), DESTROYER(2), SUBMARINE(3), NOTSET(-1);
 
-      public int length;
+      private int length;
 
       private ShipType(int length){
          this.length = length;         

@@ -79,39 +79,53 @@ public class CoordinateInput{
    }
 
    public void getCoordinates(int gridSize, Ship ship){      
-      int selection;
-      List<Pair> list;
-      Menu menu;
+      
 
       while(!isComplete){
          if(!Coordinates.isValidPair(pair.getStart(), gridSize)){
             if(!ship.getShipPlayer().getIsComputer()){
                System.out.println("Enter a valid starting coordinate:");
             }  
-            selection = -1;          
-            list = getCoordinatesFromSingle(gridSize, ship);
-            if(!ship.getShipPlayer().getIsComputer()){
-               menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
-               selection = menu.getSelection();
-            } else if(!list.isEmpty()){
-               selection = rand.nextInt(list.size()) + 1;
-            }
-            if(selection >= 0 && selection <= list.size()){
-                pair = list.get(selection -1);                
-            } else {
-               pair = new Pair();
-               isComplete = true;
-            }
-         } else if(Coordinates.isValidPair(pair.getStart(), gridSize) && Coordinates.isValidPair(pair.getEnd(), gridSize)){
-            if(!Coordinates.isValidOrientation(pair.getStart(), pair.getEnd(), gridSize).getIsValid()){
-               System.out.println("Please define a correct orientation, i.e A1..A3");
-               reset();
-            } else {
-               isComplete = true;
-               length = Coordinates.getOrientationLength(this.pair);
-               ship.setCoordinateList(getCoordinateList());
-            }
+            getCoordinate(gridSize, ship);
+         } else if(isValidPair(gridSize)){
+           checkValidPair(gridSize, ship); 
          }
+      }
+   }
+
+   private void getCoordinate(int gridSize, Ship ship){
+      int selection;
+      List<Pair> list;
+      Menu menu;
+
+      selection = -1;          
+      list = getCoordinatesFromSingle(gridSize, ship);
+      if(!ship.getShipPlayer().getIsComputer()){
+         menu = new Menu(userInput, Pair.createMenuPairList(list), "Exit");
+         selection = menu.getSelection();
+      } else if(!list.isEmpty()){
+         selection = rand.nextInt(list.size()) + 1;
+      }
+      if(selection >= 0 && selection <= list.size()){
+            pair = list.get(selection -1);                
+      } else {
+         pair = new Pair();
+         isComplete = true;
+      }
+   }
+
+   private boolean isValidPair(int gridSize){
+      return Coordinates.isValidPair(pair.getStart(), gridSize) && Coordinates.isValidPair(pair.getEnd(), gridSize);
+   }
+
+   private void checkValidPair(int gridSize, Ship ship){
+      if(!Coordinates.isValidOrientation(pair.getStart(), pair.getEnd(), gridSize).getIsValid()){
+         System.out.println("Please define a correct orientation, i.e A1..A3");
+         reset();
+      } else {
+         isComplete = true;
+         length = Coordinates.getOrientationLength(this.pair);
+         ship.setCoordinateList(getCoordinateList());
       }
    }
 

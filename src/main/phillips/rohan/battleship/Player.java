@@ -37,7 +37,7 @@ public class Player {
       while(!isInitialized){
          PlayerMenu menu = new PlayerMenu();
          menu.setMenuHeader("Is Player " + this.playerNumber + " a computer? (Y/N)");
-         menu.setupYesNo();
+         menu.setupYesNo();         
          if(menu.getSelection() == 2){
             setIsComputer(true);
          } else {
@@ -198,7 +198,7 @@ public class Player {
       newShip.setPlayer(this);
 		CoordinateInput coordinates = newShip.getShipCoordinates();
 		coordinates.setUserInput(userInput);
-      
+
 		while(!coordinates.isComplete()){			
 			coordinates.getCoordinates(gridSize, newShip);
 			if(newShip.getShipLength() != (coordinates.getLength())){				
