@@ -17,36 +17,47 @@ public class BattleshipGame {
 	private int playerTurn;
 	private boolean gameWon;
 	public static void main(String[] args) {
+		
+		BattleshipGame game = new BattleshipGame();
+		game.menu();
+	}
+
+	public BattleshipGame(){
+		userInput = new Scanner(System.in);
+		messages = new ArrayList<>();
+		playerTurn = 1;
+		gameWon = false;
+	}
+
+	public void menu(){
 		Menu menu = new MainMenu();
 		menu.setMenuHeader("Main Menu");
-		BattleshipGame game = new BattleshipGame();
-
-		while(!menu.isExitSelected() && !game.getInitialized()){
+		while(!menu.isExitSelected() && !getInitialized()){
 			switch(menu.getSelection()){
 				case 1:
-					game.initGame(game.getUserGridSize());
+					initGame(getUserGridSize());
 					break;
 				case 2:
-					game.player1.setIsInitialized(false);
-					game.player1.gatherInfo();
+					player1.setIsInitialized(false);
+					player1.gatherInfo();
 					break;
 				case 3:
-					game.player2.setIsInitialized(false);
-					game.player2.gatherInfo();
+					player2.setIsInitialized(false);
+					player2.gatherInfo();
 					break;
 				case 4:
-					game.player1.selectShips();
+					player1.selectShips();
 					break;
 				case 5:
-					game.player2.selectShips();
+					player2.selectShips();
 					break;
 				case 6:
-					if(game.canPlay()){
-						game.setInitialized(true);
-						game.play();
+					if(canPlay()){
+						setInitialized(true);
+						play();
 					} else {
 						System.out.println("Can't play yet, everything not ready yet");
-						game.messages.forEach(m -> System.out.println((game.messages.indexOf(m) + 1) + ": " + m + "\n"));
+						messages.forEach(m -> System.out.println((messages.indexOf(m) + 1) + ": " + m + "\n"));
 					}
 					break;
 				case 7:
@@ -58,15 +69,6 @@ public class BattleshipGame {
 					break;
 			}
 		}
-
-		
-	}
-
-	public BattleshipGame(){
-		userInput = new Scanner(System.in);
-		messages = new ArrayList<>();
-		playerTurn = 1;
-		gameWon = false;
 	}
 
 	public void play(){

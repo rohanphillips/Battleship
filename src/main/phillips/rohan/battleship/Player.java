@@ -96,15 +96,15 @@ public class Player {
          if(otherPlayer.getPieceBoard().isPositionEmpty(guess)){
             guessBoard.getPosition(guess).setIsGuessed(true);
             System.out.println("Missed!");
+            return true;
          } else {
             //is a hit
             ship = otherPlayer.getPieceBoard().getPosition(guess).getShip();
             System.out.println("HIT! - " + ship.getShipAbbreviation());
             guessBoard.setPositionShip(guess, ship);
             otherPlayer.getPieceBoard().getPosition(guess).setIsHit(true);
+            return false;
          }
-         
-         return true;
       }
       return false;
    }
