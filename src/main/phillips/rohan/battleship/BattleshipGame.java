@@ -1,5 +1,6 @@
 package main.phillips.rohan.battleship;
 
+import java.awt.Dimension;
 import java.util.*;
 import javax.swing.*;
 
@@ -38,10 +39,14 @@ public class BattleshipGame {
 		JFrame frame = new JFrame("Hello World Swing");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+		
+
 		JLabel label = new JLabel("Hello World");
 		frame.getContentPane().add(label);
 
+		frame.setPreferredSize(new Dimension(800, 600));
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
