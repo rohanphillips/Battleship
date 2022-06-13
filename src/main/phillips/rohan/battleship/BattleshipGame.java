@@ -1,7 +1,7 @@
 package main.phillips.rohan.battleship;
 
 import java.util.*;
-
+import javax.swing.*;
 
 import main.phillips.rohan.battleship.ships.Ship;
 import main.phillips.rohan.battleship.menu.*;
@@ -19,7 +19,12 @@ public class BattleshipGame {
 	public static void main(String[] args) {
 		
 		BattleshipGame game = new BattleshipGame();
-		game.menu();
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run(){
+				createAndShowGUI();
+			}
+		});
+		//game.menu();
 	}
 
 	public BattleshipGame(){
@@ -27,6 +32,17 @@ public class BattleshipGame {
 		messages = new ArrayList<>();
 		playerTurn = 1;
 		gameWon = false;
+	}
+
+	private static void createAndShowGUI(){
+		JFrame frame = new JFrame("Hello World Swing");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		JLabel label = new JLabel("Hello World");
+		frame.getContentPane().add(label);
+
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 	public void menu(){
